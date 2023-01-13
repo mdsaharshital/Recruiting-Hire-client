@@ -52,7 +52,9 @@ export const loginWithGoogle = createAsyncThunk(
   }
 );
 export const getUserDB = createAsyncThunk("auth/getUser", async (email) => {
-  const res = await fetch(`http://localhost:5000/user/${email}`);
+  const res = await fetch(
+    `https://recruiting-hire-server.vercel.app/user/${email}`
+  );
   const data = await res.json();
   console.log("", data);
   if (data.status) {
