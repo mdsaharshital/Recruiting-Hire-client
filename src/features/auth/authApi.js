@@ -1,4 +1,5 @@
 import apiSlice from "../api/apiSlice";
+import { getUserDB } from "./authSlice";
 
 export const authApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -11,6 +12,14 @@ export const authApi = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      async onQueryStarted(data, { dispatch, queryFulfilled }) {
+        try {
+          const res = await queryFulfilled;
+          dispatch(getUserDB(data.email));
+        } catch (error) {
+          //
+        }
+      },
     }),
   }),
 });

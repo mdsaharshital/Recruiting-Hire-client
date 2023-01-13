@@ -4,8 +4,11 @@ import { useForm, useWatch } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { createAccount } from "../features/auth/authSlice";
 import { useDispatch } from "react-redux";
+import auth from "../firebase.init";
+import { useAuthState } from "react-firebase-hooks/auth";
 const Signup = () => {
   const { handleSubmit, register, reset, control } = useForm();
+  const [user] = useAuthState(auth);
   const dispatch = useDispatch();
   const password = useWatch({ control, name: "password" });
   const confirmPassword = useWatch({ control, name: "confirmPassword" });
@@ -29,9 +32,13 @@ const Signup = () => {
   const onSubmit = async ({ email, password }) => {
     console.log(email, password);
     dispatch(createAccount({ email, password }));
-    reset();
+    // reset();
   };
-
+  useEffect(() => {
+    if (user?.email) {
+      navigate("/");
+    }
+  }, [user?.email, navigate]);
   return (
     <div className="flex h-screen items-center pt-14">
       <div className="w-1/2">

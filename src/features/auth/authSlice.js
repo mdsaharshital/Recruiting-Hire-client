@@ -6,6 +6,7 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import auth from "./../../firebase.init";
+import { toast } from "react-hot-toast";
 
 const initialState = {
   user: { email: "", role: "" },
@@ -22,7 +23,7 @@ export const createAccount = createAsyncThunk(
         return userCredential.user;
       })
       .catch((err) => {
-        console.log(err);
+        toast.error(err.message);
       });
     console.log("", data);
     return data.user.email;
@@ -36,7 +37,7 @@ export const loginUser = createAsyncThunk(
         console.log("shhs");
       })
       .catch((err) => {
-        console.log(err);
+        toast.error(err.message);
       });
     console.log("", data);
     return data.user.email;

@@ -51,6 +51,7 @@ const EmployerRegistration = () => {
     if (result.data.acknowledged) {
       toast.success("Successfully registered as Employer");
       reset();
+      navigate("/");
     }
   };
 
@@ -87,9 +88,9 @@ const EmployerRegistration = () => {
             </label>
             <input
               type="email"
-              className="text-black bg-blue-200"
-              id="email"
+              className="text-black bg-blue-200 cursor-not-allowed"
               disabled
+              id="email"
               {...register("email")}
             />
           </div>
