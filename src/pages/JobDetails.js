@@ -4,6 +4,7 @@ import { BsArrowRightShort, BsArrowReturnRight } from "react-icons/bs";
 import { useParams } from "react-router-dom";
 import {
   useAddQueryMutation,
+  useAddReplyMutation,
   useApplyToJobMutation,
   useGetJobByIdQuery,
 } from "../features/job/jobSlice";
@@ -12,10 +13,12 @@ import { toast } from "react-hot-toast";
 
 const JobDetails = () => {
   const [query, setQuery] = useState("");
+  const [reply, setReply] = useState("");
   const { id } = useParams();
   const { data } = useGetJobByIdQuery(id);
   const [applyToJob] = useApplyToJobMutation();
   const [addQuery] = useAddQueryMutation();
+  const [replyQue] = useAddReplyMutation();
   const { user } = useSelector((state) => state.auth);
   console.log("", data);
   const {
@@ -43,13 +46,21 @@ const JobDetails = () => {
     console.log(applyData);
   };
   const handleQuery = () => {
-    const newdata = {
+    const newData = {
       userId: user._id,
       email: user.email,
       question: query,
       jobId: id,
     };
-    addQuery(newdata);
+    addQuery(newData);
+  };
+  const handleReply = (id, question) => {
+    const newData = {
+      userId: id,
+      reply: reply,
+      question: question,
+    };
+    replyQue(newData);
   };
   return (
     <div className="pt-14 grid grid-cols-12 gap-5">
@@ -133,10 +144,12 @@ const JobDetails = () => {
                         placeholder="Reply"
                         type="text"
                         className="w-full"
+                        onBlur={(e) => setReply(e.target.value)}
                       />
                       <button
                         className="shrink-0 h-14 w-14 bg-primary/10 border border-primary hover:bg-primary rounded-full transition-all  grid place-items-center text-primary hover:text-white"
                         type="button"
+                        onClick={() => handleReply(id, question)}
                       >
                         <BsArrowRightShort size={30} />
                       </button>
