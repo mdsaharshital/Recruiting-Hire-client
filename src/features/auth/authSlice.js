@@ -10,7 +10,7 @@ import { toast } from "react-hot-toast";
 
 const initialState = {
   user: { email: "", role: "" },
-  isLoading: false,
+  isLoading: true,
   isError: false,
   error: "",
 };
