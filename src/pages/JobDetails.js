@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import meeting from "../assets/meeting.jpg";
 import { BsArrowRightShort, BsArrowReturnRight } from "react-icons/bs";
 import { useParams } from "react-router-dom";
 import {
+  useAddQueryMutation,
   useApplyToJobMutation,
   useGetJobByIdQuery,
 } from "../features/job/jobSlice";
@@ -10,9 +11,11 @@ import { useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
 
 const JobDetails = () => {
+  const [query, setQuery] = useState("");
   const { id } = useParams();
   const { data } = useGetJobByIdQuery(id);
   const [applyToJob] = useApplyToJobMutation();
+  const [addQuery] = useAddQueryMutation();
   const { user } = useSelector((state) => state.auth);
   console.log("", data);
   const {
@@ -29,6 +32,7 @@ const JobDetails = () => {
     overview,
     queries,
     applicants,
+    jobPostedBy,
     _id,
   } = data?.data || {};
   const handleApplyJob = () => {
@@ -37,6 +41,15 @@ const JobDetails = () => {
       toast.success("Applied");
     });
     console.log(applyData);
+  };
+  const handleQuery = () => {
+    const newdata = {
+      userId: user._id,
+      email: user.email,
+      question: query,
+      jobId: id,
+    };
+    addQuery(newdata);
   };
   return (
     <div className="pt-14 grid grid-cols-12 gap-5">
@@ -114,32 +127,42 @@ const JobDetails = () => {
                     </p>
                   ))}
 
-                  <div className="flex gap-3 my-5">
-                    <input placeholder="Reply" type="text" className="w-full" />
-                    <button
-                      className="shrink-0 h-14 w-14 bg-primary/10 border border-primary hover:bg-primary rounded-full transition-all  grid place-items-center text-primary hover:text-white"
-                      type="button"
-                    >
-                      <BsArrowRightShort size={30} />
-                    </button>
-                  </div>
+                  {jobPostedBy === user.email && (
+                    <div className="flex gap-3 my-5">
+                      <input
+                        placeholder="Reply"
+                        type="text"
+                        className="w-full"
+                      />
+                      <button
+                        className="shrink-0 h-14 w-14 bg-primary/10 border border-primary hover:bg-primary rounded-full transition-all  grid place-items-center text-primary hover:text-white"
+                        type="button"
+                      >
+                        <BsArrowRightShort size={30} />
+                      </button>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
 
-            <div className="flex gap-3 my-5">
-              <input
-                placeholder="Ask a question..."
-                type="text"
-                className="w-full"
-              />
-              <button
-                className="shrink-0 h-14 w-14 bg-primary/10 border border-primary hover:bg-primary rounded-full transition-all  grid place-items-center text-primary hover:text-white"
-                type="button"
-              >
-                <BsArrowRightShort size={30} />
-              </button>
-            </div>
+            {jobPostedBy !== user.email && (
+              <div className="flex gap-3 my-5">
+                <input
+                  placeholder="Ask a question..."
+                  type="text"
+                  className="w-full"
+                  onBlur={(e) => setQuery(e.target.value)}
+                />
+                <button
+                  className="shrink-0 h-14 w-14 bg-primary/10 border border-primary hover:bg-primary rounded-full transition-all  grid place-items-center text-primary hover:text-white"
+                  type="button"
+                  onClick={handleQuery}
+                >
+                  <BsArrowRightShort size={30} />
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>
