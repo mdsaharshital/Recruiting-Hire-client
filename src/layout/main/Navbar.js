@@ -1,11 +1,16 @@
-import { signOut } from "firebase/auth";
 import React from "react";
-
+import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useLocation } from "react-router-dom";
+import { signOutuser } from "../../features/auth/authSlice";
+import auth from "../../firebase.init";
+import { useDispatch } from "react-redux";
+import { signOut } from "firebase/auth";
 
 const Navbar = () => {
   const { pathname } = useLocation();
-
+  const dispatch = useDispatch();
+  const [user] = useAuthState(auth);
+  console.log("", user);
   return (
     <nav
       className={`h-14 fixed w-full z-[999] ${
@@ -21,15 +26,38 @@ const Navbar = () => {
             Jobs
           </Link>
         </li>
-
-        <li>
-          <Link
-            className="border border-black px-2 py-1 rounded-full hover:border-primary hover:text-white hover:bg-primary hover:px-4 transition-all "
-            to="/login"
+        {user?.email && (
+          <li>
+            <Link
+              className="border border-black px-2 py-1 rounded-full hover:border-primary hover:text-white hover:bg-primary hover:px-4 transition-all "
+              to="/dashboard"
+            >
+              Dashboard
+            </Link>
+          </li>
+        )}
+        {user?.email ? (
+          <li
+            onClick={() =>
+              signOut(auth).finally(() => {
+                dispatch(signOutuser());
+              })
+            }
           >
-            Login
-          </Link>
-        </li>
+            <p className="border border-black px-2 py-1 rounded-full hover:border-primary hover:text-white hover:bg-primary hover:px-4 transition-all cursor-pointer">
+              Sign out
+            </p>
+          </li>
+        ) : (
+          <li>
+            <Link
+              className="border border-black px-2 py-1 rounded-full hover:border-primary hover:text-white hover:bg-primary hover:px-4 transition-all "
+              to="/login"
+            >
+              Login
+            </Link>
+          </li>
+        )}
       </ul>
     </nav>
   );
