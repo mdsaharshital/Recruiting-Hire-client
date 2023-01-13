@@ -25,7 +25,7 @@ export const createAccount = createAsyncThunk(
         console.log(err);
       });
     console.log("", data);
-    return data.email;
+    return data.user.email;
   }
 );
 export const loginUser = createAsyncThunk(
@@ -50,17 +50,19 @@ export const loginWithGoogle = createAsyncThunk(
     return data.user.email;
   }
 );
-
+export const getUserDB = createAsyncThunk("auth/getUser", async (email) => {
+  const res = await fetch(`http://localhost:5000/user/${email}`);
+  const data = await res.json();
+  console.log("", data);
+  if (data.status) {
+    return data;
+  }
+  return email;
+});
 export const authSlice = createSlice({
   initialState,
   name: "auth",
   reducers: {
-    getUser: (state, { payload }) => {
-      state.user = payload;
-      state.isLoading = false;
-      state.isError = false;
-      state.error = "";
-    },
     signOutuser: (state) => {
       state.user = { role: "", email: "" };
     },
@@ -120,9 +122,31 @@ export const authSlice = createSlice({
         state.isLoading = false;
         state.isError = false;
         state.error = action.error.message;
+      })
+      .addCase(getUserDB.pending, (state) => {
+        state.user = { email: "", role: "" };
+        state.isLoading = true;
+        state.isError = false;
+        state.error = "";
+      })
+      .addCase(getUserDB.fulfilled, (state, { payload }) => {
+        if (payload.status) {
+          state.user = payload.data;
+        } else {
+          state.user.email = payload;
+        }
+        state.isLoading = false;
+        state.isError = false;
+        state.error = "";
+      })
+      .addCase(getUserDB.rejected, (state, action) => {
+        state.user = { email: "", role: "" };
+        state.isLoading = false;
+        state.isError = false;
+        state.error = action.error.message;
       });
   },
 });
 
-export const { getUser, signOutuser } = authSlice.actions;
+export const { signOutuser } = authSlice.actions;
 export default authSlice.reducer;

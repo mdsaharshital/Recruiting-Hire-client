@@ -1,21 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-
 import { useNavigate } from "react-router-dom";
 import loginImage from "../assets/login.svg";
 import { loginUser } from "../features/auth/authSlice";
+import auth from "../firebase.init";
+
 const Login = () => {
   const dispatch = useDispatch();
-  const { register, handleSubmit, reset } = useForm();
   const navigate = useNavigate();
-
+  const { register, handleSubmit, reset } = useForm();
+  const [user] = useAuthState(auth);
   const onSubmit = ({ email, password }) => {
     console.log({ email, password });
     dispatch(loginUser({ email, password }));
     reset();
   };
-
+  useEffect(() => {
+    if (user?.email) {
+      navigate("/");
+    }
+  }, [user?.email, navigate]);
   return (
     <div className="flex h-screen items-center">
       <div className="w-1/2">
