@@ -6,7 +6,10 @@ const Sidebar = () => {
   const {
     user: { role },
   } = useSelector((state) => state.auth);
-  const employerMenu = [{ name: "Add Job", path: "add-job" }];
+  const employerMenu = [
+    { name: "Add Job", path: "add-job" },
+    { name: "My Posted Jobs", path: "my-posted-jobs" },
+  ];
   const candidateMenu = [{ name: "Applied Job", path: "applied-job" }];
   return (
     <div className="bg-primary/10 col-span-2 h-screen sticky top-0">

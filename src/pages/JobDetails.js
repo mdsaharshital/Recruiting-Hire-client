@@ -36,14 +36,27 @@ const JobDetails = () => {
     queries,
     applicants,
     jobPostedBy,
+    jobStatus,
     _id,
   } = data?.data || {};
+  //
   const handleApplyJob = () => {
-    const applyData = { userId: user._id, jobId: id, email: user.email };
-    applyToJob(applyData).finally(() => {
-      toast.success("Applied");
-    });
+    const currentDate = new Date();
+    const isoDate = currentDate.toISOString();
+    const applyData = {
+      userId: user._id,
+      jobId: id,
+      email: user.email,
+      appliedTime: isoDate,
+      approvalStatus: "pending",
+    };
+    if (user.email && user.role === "candidate") {
+      applyToJob(applyData).finally(() => {
+        return toast.success("Applied");
+      });
+    }
     console.log(applyData);
+    return toast.error("Sorry, You have to register first to apply");
   };
   const handleQuery = () => {
     const newData = {
@@ -62,6 +75,8 @@ const JobDetails = () => {
     };
     replyQue(newData);
   };
+  const checkApply =
+    applicants?.filter((apps) => apps.email === user.email).length > 0;
   return (
     <div className="pt-14 grid grid-cols-12 gap-5">
       <div className="col-span-9 mb-10">
@@ -70,16 +85,25 @@ const JobDetails = () => {
         </div>
         <div className="space-y-5">
           <div className="flex justify-between items-center mt-5">
-            <h1 className="text-xl font-semibold text-primary">{position}</h1>
+            <h1 className="text-xl font-semibold text-primary">
+              {position}{" "}
+              {jobPostedBy === user.email && (
+                <span className="rounded-full bg-slate-200 text-black cursor-pointer text-[10px] px-2 py-1 ml-2">
+                  {applicants?.length} applicants
+                </span>
+              )}
+            </h1>
             <button
               className="btn"
               disabled={
-                applicants?.filter((apps) => apps.email === user.email).length >
-                  0 || user.role === "employer"
+                !jobStatus ||
+                checkApply ||
+                user.role === "employer" ||
+                user.email === ""
               }
               onClick={handleApplyJob}
             >
-              Apply
+              {!jobStatus ? "Closed" : `${checkApply ? "Applied" : "Apply"}`}
             </button>
           </div>
           <div>

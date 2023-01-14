@@ -35,6 +35,7 @@ const AddJob = () => {
       applicants: [],
       queries: [],
       jobPostedBy: email,
+      jobStatus: "open",
     };
     // console.log(newData);
     postJob(newData).finally(() => {

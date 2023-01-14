@@ -19,32 +19,35 @@ const AppliedJobs = () => {
     <div className="px-3">
       <h1 className="text-xl py-5">Applied jobs</h1>
       <div className="grid grid-cols-2 gap-5 pb-5 ">
-        {data?.data?.map(
-          ({ _id, position, companyName, location, employmentType }) => (
-            <div
-              key={_id}
-              className="border border-gray-300 shadow-md p-4 rounded-xl text-primary"
-            >
-              <div
-                className="flex justify-between  text-primary cursor-pointer"
+        {data?.data?.map(({ _id, position, companyName }) => (
+          <div
+            key={_id}
+            className="border border-gray-300 shadow-md p-4 rounded-xl text-primary"
+          >
+            <div className="flex justify-between  text-primary ">
+              <div>
+                <p
+                  className="text-xl cursor-pointer hover:text-blue-500"
+                  onClick={() => navigate(`/job-details/${_id}`)}
+                >
+                  {position}
+                </p>
+                <small className="text-primary/40 ">
+                  by{" "}
+                  <span className="font-semibold hover:text-primary cursor-pointer hover:underline transition-all">
+                    {companyName}
+                  </span>
+                </small>
+              </div>
+              <button
+                className=""
                 onClick={() => navigate(`/job-details/${_id}`)}
               >
-                <div>
-                  <p className="text-xl">{position}</p>
-                  <small className="text-primary/40 ">
-                    by{" "}
-                    <span className="font-semibold hover:text-primary cursor-pointer hover:underline transition-all">
-                      {companyName}
-                    </span>
-                  </small>
-                </div>
-                <button className="">
-                  <BsChevronRight />
-                </button>
-              </div>
+                <BsChevronRight />
+              </button>
             </div>
-          )
-        )}
+          </div>
+        ))}
       </div>
     </div>
   );
