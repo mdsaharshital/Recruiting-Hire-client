@@ -36,7 +36,7 @@ function ChitChat({ data, isVisible, setIsVisible }) {
           onClick={() => setIsVisible(!isVisible)}
         />
       </p> */}
-      <p className="absolute top-[-33px] right- text-white">
+      <p className="absolute top-[-33px] right-5 text-white">
         <MdClose
           fontSize={"24px"}
           className="hover:text-red-500 transition-all cursor-pointer"
