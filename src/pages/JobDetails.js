@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import meeting from "../assets/meeting.jpg";
 import { BsArrowRightShort, BsArrowReturnRight } from "react-icons/bs";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import {
   useAddQueryMutation,
   useAddReplyMutation,
@@ -10,8 +10,10 @@ import {
 } from "../features/job/jobSlice";
 import { useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
+import ChitChat from "../components/ChitChat";
 
 const JobDetails = () => {
+  const [isVisible, setIsVisible] = useState(false);
   const [query, setQuery] = useState("");
   const [reply, setReply] = useState("");
   const { id } = useParams();
@@ -36,10 +38,15 @@ const JobDetails = () => {
     queries,
     applicants,
     jobPostedBy,
+    firstName,
+    lastName,
     jobStatus,
-    _id,
+    recuiterId,
   } = data?.data || {};
   //
+  const newData = { email: jobPostedBy, _id: recuiterId, firstName, lastName };
+  //
+  console.log("rec", recuiterId);
   const handleApplyJob = () => {
     const currentDate = new Date();
     const isoDate = currentDate.toISOString();
@@ -93,18 +100,26 @@ const JobDetails = () => {
                 </span>
               )}
             </h1>
-            <button
-              className="btn"
-              disabled={
-                !jobStatus ||
-                checkApply ||
-                user.role === "employer" ||
-                user.email === ""
-              }
-              onClick={handleApplyJob}
-            >
-              {!jobStatus ? "Closed" : `${checkApply ? "Applied" : "Apply"}`}
-            </button>
+            <div className="">
+              <button
+                className="btn mr-2"
+                onClick={() => setIsVisible(!isVisible)}
+              >
+                {checkApply && "Message Us"}
+              </button>
+              <button
+                className="btn"
+                disabled={
+                  !jobStatus ||
+                  checkApply ||
+                  user.role === "employer" ||
+                  user.email === ""
+                }
+                onClick={handleApplyJob}
+              >
+                {!jobStatus ? "Closed" : `${checkApply ? "Applied" : "Apply"}`}
+              </button>
+            </div>
           </div>
           <div>
             <h1 className="text-primary text-lg font-medium mb-3">Overview</h1>
@@ -248,12 +263,19 @@ const JobDetails = () => {
           </div>
           <div>
             <p>Website</p>
-            <a className="font-semibold text-lg" href="#">
+            <Link className="font-semibold text-lg" to="/">
               https://website.com
-            </a>
+            </Link>
           </div>
         </div>
       </div>
+      {isVisible && (
+        <ChitChat
+          data={newData}
+          isVisible={isVisible}
+          setIsVisible={setIsVisible}
+        />
+      )}
     </div>
   );
 };

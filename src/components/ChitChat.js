@@ -61,7 +61,7 @@ function ChitChat({ data, isVisible, setIsVisible }) {
     setMessages(getMessages?.data?.messages);
   }, [getMessages]);
   const chatRef = useRef(null);
-  const { email, firstName, _id } = data;
+  const { firstName } = data;
   //
   console.log("msg", getMessages);
   useEffect(() => {

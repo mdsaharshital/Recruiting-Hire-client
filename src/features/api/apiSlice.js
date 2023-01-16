@@ -4,7 +4,7 @@ const apiSlice = createApi({
   reducerPath: "api",
   tagTypes: ["job,jobs"],
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:5000",
+    baseUrl: "https://recruiting-hire-server.vercel.app",
   }),
   endpoints: (builder) => ({
     // code splited

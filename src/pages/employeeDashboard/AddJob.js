@@ -8,7 +8,7 @@ import { usePostJobMutation } from "../../features/job/jobSlice";
 const AddJob = () => {
   const [postJob] = usePostJobMutation();
   const {
-    user: { companyName, email },
+    user: { companyName, email, _id, firstName, lastName },
   } = useSelector((state) => state.auth);
   const { handleSubmit, register, control, reset } = useForm({
     defaultValues: { companyName },
@@ -28,7 +28,7 @@ const AddJob = () => {
     append: reqAppend,
     remove: reqRemove,
   } = useFieldArray({ control, name: "requirements" });
-
+  console.log(firstName, lastName);
   const onSubmit = (data) => {
     const newData = {
       ...data,
@@ -36,6 +36,9 @@ const AddJob = () => {
       queries: [],
       jobPostedBy: email,
       jobStatus: "open",
+      recuiterId: _id,
+      firstName,
+      lastName,
     };
     // console.log(newData);
     postJob(newData).finally(() => {
