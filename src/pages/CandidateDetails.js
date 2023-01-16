@@ -11,6 +11,7 @@ const CandidateDetails = () => {
   if (isLoading) return <p></p>;
   const newData = data?.data;
   console.log(newData);
+
   return (
     <div className="pt-14 px-6 ">
       <h1 className="">candidate details</h1>

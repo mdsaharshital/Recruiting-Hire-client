@@ -12,6 +12,7 @@ export const jobSlice = apiSlice.injectEndpoints({
     }),
     appliedJobs: builder.query({
       query: (email) => `/applied-jobs/${email}`,
+      invalidatesTags: ["jobs"],
     }),
     postJob: builder.mutation({
       query: (data) => ({

@@ -1,5 +1,6 @@
 export default function ApplicationDetails({ data, isVisible, setIsVisible }) {
   const { email, firstName, lastName, gender, country, city, address } = data;
+
   return (
     <div className="overflow-hidden bg-white shadow sm:rounded-lg">
       <div className="px-4 py-5 sm:px-6">

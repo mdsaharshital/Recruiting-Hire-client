@@ -11,7 +11,6 @@ import PrivateRoute from "../utils/PrivateRoute";
 import AddJob from "../pages/employeeDashboard/AddJob";
 import EmployerDashboard from "../pages/employeeDashboard/EmployerDashboard";
 import CandidateDashboard from "../pages/candidateDashboard/CandidateDashboard";
-// import AppliedJobs from "../pages/candidateDashboard/AppliedJobs";
 import AppliedJobs from "./../pages/candidateDashboard/AppliedJobs";
 import MyPostedJobs from "../pages/employeeDashboard/MyPostedJobs";
 import CandidateDetails from "../pages/CandidateDetails";
@@ -43,7 +42,11 @@ const routes = createBrowserRouter([
       },
       {
         path: "/candidate-details/:id",
-        element: <CandidateDetails />,
+        element: (
+          <PrivateRoute>
+            <CandidateDetails />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/register",
