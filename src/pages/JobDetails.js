@@ -61,9 +61,10 @@ const JobDetails = () => {
       applyToJob(applyData).finally(() => {
         return toast.success("Applied");
       });
+    } else {
+      return toast.error("Sorry, You have to register first to apply");
     }
     console.log(applyData);
-    return toast.error("Sorry, You have to register first to apply");
   };
   const handleQuery = () => {
     const newData = {
@@ -86,6 +87,13 @@ const JobDetails = () => {
     applicants?.filter((apps) => apps.email === user.email).length > 0;
   return (
     <div className="pt-14 grid grid-cols-12 gap-5">
+      {isVisible && (
+        <ChitChat
+          data={newData}
+          isVisible={isVisible}
+          setIsVisible={setIsVisible}
+        />
+      )}
       <div className="col-span-9 mb-10">
         <div className="h-80 rounded-xl overflow-hidden">
           <img className="h-full w-full object-cover" src={meeting} alt="" />
@@ -103,9 +111,10 @@ const JobDetails = () => {
             <div className="">
               <button
                 className="btn mr-2"
+                disabled={!checkApply || !jobStatus}
                 onClick={() => setIsVisible(!isVisible)}
               >
-                {checkApply && "Message Us"}
+                {checkApply ? "Message Us" : "Apply first to message"}
               </button>
               <button
                 className="btn"
@@ -269,13 +278,6 @@ const JobDetails = () => {
           </div>
         </div>
       </div>
-      {isVisible && (
-        <ChitChat
-          data={newData}
-          isVisible={isVisible}
-          setIsVisible={setIsVisible}
-        />
-      )}
     </div>
   );
 };
