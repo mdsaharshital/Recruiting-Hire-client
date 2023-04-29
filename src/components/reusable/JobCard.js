@@ -1,11 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { JobsDescModal } from "../JobsDescModal";
+import { useDispatch } from "react-redux";
+import { getJobDetails } from "../../features/job/jobSlice";
 
 const JobCard = ({ jobData }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { _id, position, companyName, location, employmentType } =
     jobData || {};
+  const [isOpen, setIsOpen] = useState(false);
 
+  const openModal = () => {
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
   return (
     <div
       key={_id}
@@ -25,9 +37,17 @@ const JobCard = ({ jobData }) => {
       </div>
       <div className="flex justify-between items-center mt-5">
         <p>{employmentType}</p>
-        <button className="btn" onClick={() => navigate(`/job-details/${_id}`)}>
+        <button
+          className="btn"
+          onClick={() => {
+            navigate(`/job-details/${_id}`);
+            dispatch(getJobDetails(jobData));
+          }}
+        >
           Details
         </button>
+        <button onClick={openModal}>Open Modal</button>
+        <JobsDescModal isOpen={isOpen} closeModal={closeModal} />
       </div>
     </div>
   );

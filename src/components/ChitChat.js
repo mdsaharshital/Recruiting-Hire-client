@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import {
   useAddMessageMutation,
   useGetMessagesQuery,
-} from "../features/message/messageSlice";
+} from "../features/message/messageApi";
 
 function ChitChat({ data, isVisible, setIsVisible }) {
   // const hello = {

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import {
   useAppliedJobsQuery,
   useGetJobsQuery,
-} from "../../features/job/jobSlice";
+} from "../../features/job/jobApi";
 import { BsChevronRight } from "react-icons/bs";
 
 const AppliedJobs = () => {

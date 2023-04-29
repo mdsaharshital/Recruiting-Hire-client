@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import {
   useGetJobsQuery,
   useUpdateJobMutation,
-} from "../../features/job/jobSlice";
+} from "../../features/job/jobApi";
 import { useSelector } from "react-redux";
 import { HiLockClosed, HiLockOpen } from "react-icons/hi";
 import { toast } from "react-hot-toast";

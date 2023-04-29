@@ -1,6 +1,6 @@
 import React from "react";
 import JobCard from "../components/reusable/JobCard";
-import { useGetJobsQuery } from "../features/job/jobSlice";
+import { useGetJobsQuery } from "../features/job/jobApi";
 import { BiSearchAlt } from "react-icons/bi";
 import Badge from "../components/reusable/Badge";
 

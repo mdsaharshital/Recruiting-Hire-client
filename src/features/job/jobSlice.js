@@ -1,67 +1,19 @@
-import apiSlice from "../api/apiSlice";
+import { createSlice } from "@reduxjs/toolkit";
 
-export const jobSlice = apiSlice.injectEndpoints({
-  endpoints: (builder) => ({
-    getJobById: builder.query({
-      query: (id) => `/job/${id}`,
-      providesTags: ["job"],
-    }),
-    getJobs: builder.query({
-      query: () => `/jobs`,
-      providesTags: ["jobs"],
-    }),
-    appliedJobs: builder.query({
-      query: (email) => `/applied-jobs/${email}`,
-      invalidatesTags: ["jobs"],
-    }),
-    postJob: builder.mutation({
-      query: (data) => ({
-        url: "/job",
-        method: "POST",
-        body: data,
-      }),
-    }),
-    updateJob: builder.mutation({
-      query: (data) => ({
-        url: "/updateJob",
-        method: "PUT",
-        body: data,
-      }),
-      invalidatesTags: ["jobs"],
-    }),
-    applyToJob: builder.mutation({
-      query: (data) => ({
-        url: "/apply",
-        method: "PATCH",
-        body: data,
-      }),
-      invalidatesTags: ["job"],
-    }),
-    addQuery: builder.mutation({
-      query: (data) => ({
-        url: "/query",
-        method: "PATCH",
-        body: data,
-      }),
-      invalidatesTags: ["job"],
-    }),
-    addReply: builder.mutation({
-      query: (data) => ({
-        url: "/reply",
-        method: "PATCH",
-        body: data,
-      }),
-      invalidatesTags: ["job"],
-    }),
-  }),
+const initialState = {
+  jobDetails: {},
+  error: "",
+};
+
+export const jobSlice = createSlice({
+  initialState,
+  name: "jobs",
+  reducers: {
+    getJobDetails: (state, { payload }) => {
+      state.jobDetails = { ...payload };
+    },
+  },
 });
-export const {
-  usePostJobMutation,
-  useGetJobByIdQuery,
-  useGetJobsQuery,
-  useApplyToJobMutation,
-  useAddQueryMutation,
-  useAddReplyMutation,
-  useAppliedJobsQuery,
-  useUpdateJobMutation,
-} = jobSlice;
+
+export const { getJobDetails } = jobSlice.actions;
+export default jobSlice.reducer;

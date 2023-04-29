@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import ApplicationDetails from "../components/ApplicationDetail";
 import ChitChat from "../components/ChitChat";
-import { useGetCandidateQuery } from "../features/message/messageSlice";
+import { useGetCandidateQuery } from "../features/message/messageApi";
 
 const CandidateDetails = () => {
   const [isVisible, setIsVisible] = useState(false);

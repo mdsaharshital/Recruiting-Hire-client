@@ -1,6 +1,6 @@
 import apiSlice from "../api/apiSlice";
 
-const messageSlice = apiSlice.injectEndpoints({
+const messageApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     //
     getCandidate: builder.query({
@@ -24,4 +24,4 @@ export const {
   useGetCandidateQuery,
   useAddMessageMutation,
   useGetMessagesQuery,
-} = messageSlice;
+} = messageApi;

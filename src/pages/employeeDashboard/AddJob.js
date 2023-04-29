@@ -3,7 +3,7 @@ import { useFieldArray, useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { FiTrash } from "react-icons/fi";
 import { useSelector } from "react-redux";
-import { usePostJobMutation } from "../../features/job/jobSlice";
+import { usePostJobMutation } from "../../features/job/jobApi";
 
 const AddJob = () => {
   const [postJob] = usePostJobMutation();

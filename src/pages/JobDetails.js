@@ -7,7 +7,7 @@ import {
   useAddReplyMutation,
   useApplyToJobMutation,
   useGetJobByIdQuery,
-} from "../features/job/jobSlice";
+} from "../features/job/jobApi";
 import { useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
 import ChitChat from "../components/ChitChat";
@@ -17,12 +17,19 @@ const JobDetails = () => {
   const [query, setQuery] = useState("");
   const [reply, setReply] = useState("");
   const { id } = useParams();
-  const { data } = useGetJobByIdQuery(id);
   const [applyToJob] = useApplyToJobMutation();
   const [addQuery] = useAddQueryMutation();
   const [replyQue] = useAddReplyMutation();
   const { user } = useSelector((state) => state.auth);
-  console.log("", data);
+  const { data } = useGetJobByIdQuery(id);
+  const { jobDetails } = useSelector((state) => state.jobs);
+  console.log("ee", data?.data);
+
+  let jobData = jobDetails;
+  if (Object.keys(jobDetails).length === 0) {
+    jobData = data?.data;
+  }
+
   const {
     companyName,
     position,
@@ -42,7 +49,7 @@ const JobDetails = () => {
     lastName,
     jobStatus,
     recuiterId,
-  } = data?.data || {};
+  } = jobData || {};
   //
   const newData = { email: jobPostedBy, _id: recuiterId, firstName, lastName };
   //
