@@ -11,7 +11,7 @@ const Sidebar = () => {
   } = useSelector((state) => state.auth);
   const employerMenu = [
     { name: "Add Job", path: "add-job" },
-    { name: "My Posted Jobs", path: "my-posted-jobs" },
+    { name: "My Jobs", path: "my-posted-jobs" },
   ];
   const candidateMenu = [{ name: "Applied Job", path: "applied-job" }];
 
@@ -71,12 +71,17 @@ const Sidebar = () => {
       {showMenu && (
         <div className="md:hidden z-[999]">
           <ul className="w-[35vw] h-[100vh] bg-gray-900 text-white py-4">
+            <Link to="/" className="flex items-center mb-3 lg:mb-0">
+              <FaChevronLeft />
+              <h1>Back</h1>
+            </Link>
             {role === "employer" &&
               employerMenu.map(({ name, path }, index) => (
                 <li key={index}>
                   <Link
-                    className="bg-white text-black transition-all w-full block p-2 lg:py-2 lg:px-3 rounded-full"
+                    className="bg-white text-black transition-all w-full block my-2 p-2 lg:py-2 lg:px-3 rounded-full"
                     to={path}
+                    onClick={() => setShowMenu(false)}
                   >
                     {name}
                   </Link>
@@ -86,8 +91,9 @@ const Sidebar = () => {
               candidateMenu.map(({ name, path }, index) => (
                 <li key={index}>
                   <Link
-                    className="bg-white text-black transition-all w-full block p-2 lg:py-2 lg:px-3 rounded-full"
+                    className="bg-white text-black transition-all w-full block my-2 p-2 lg:py-2 lg:px-3 rounded-full"
                     to={path}
+                    onClick={() => setShowMenu(false)}
                   >
                     {name}
                   </Link>

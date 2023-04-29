@@ -21,18 +21,21 @@ const Navbar = () => {
       }`}
     >
       <ul className="max-w-7xl mx-auto flex gap-3 h-full items-center">
-        <li className="flex-auto font-semibold text-2xl">
+        <li className="flex-auto font-semibold text-[18px] md:text-2xl">
           <Link to="/">Recruiting Hire</Link>
         </li>
         <li>
-          <Link className="hover:text-primary" to="/jobs">
+          <Link
+            className="hover:text-primary text-[14px] md:text-[16px]"
+            to="/jobs"
+          >
             Jobs
           </Link>
         </li>
         {email && role && (
           <li>
             <Link
-              className="border border-black px-2 py-1 rounded-full hover:border-primary hover:text-white hover:bg-primary hover:px-4 transition-all "
+              className="border border-black text-[14px] md:text-[16px] px-2 py-1 rounded-full hover:border-primary hover:text-white hover:bg-primary hover:px-4 transition-all "
               to="/dashboard"
             >
               Dashboard
@@ -42,7 +45,7 @@ const Navbar = () => {
         {email && !role && (
           <li>
             <Link
-              className="border border-black px-2 py-1 rounded-full hover:border-primary hover:text-white hover:bg-primary hover:px-4 transition-all "
+              className="border border-black text-[14px] md:text-[16px] px-2 py-1 rounded-full hover:border-primary hover:text-white hover:bg-primary hover:px-4 transition-all "
               to="/register"
             >
               Register
@@ -57,7 +60,7 @@ const Navbar = () => {
               })
             }
           >
-            <p className="border border-black px-2 py-1 rounded-full hover:border-primary hover:text-white hover:bg-primary hover:px-4 transition-all cursor-pointer">
+            <p className="border border-black text-[14px] md:text-[16px] px-2 py-1 rounded-full hover:border-primary hover:text-white hover:bg-primary hover:px-4 transition-all cursor-pointer">
               Sign out
             </p>
           </li>
