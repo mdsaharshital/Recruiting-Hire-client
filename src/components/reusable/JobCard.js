@@ -46,8 +46,16 @@ const JobCard = ({ jobData }) => {
         >
           Details
         </button>
-        <button onClick={openModal}>Open Modal</button>
-        <JobsDescModal isOpen={isOpen} closeModal={closeModal} />
+        {/* opens a modal for job details */}
+        {/* <button
+          onClick={() => {
+            openModal();
+            dispatch(getJobDetails(jobData));
+          }}
+        >
+          Open Modal
+        </button>
+        <JobsDescModal isOpen={isOpen} closeModal={closeModal} /> */}
       </div>
     </div>
   );
