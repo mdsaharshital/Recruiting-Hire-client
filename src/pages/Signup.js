@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import auth from "../firebase.init";
 import { useAuthState } from "react-firebase-hooks/auth";
 const Signup = () => {
-  const { handleSubmit, register, reset, control } = useForm();
+  const { handleSubmit, register, control } = useForm();
   const [user] = useAuthState(auth);
   const dispatch = useDispatch();
   const password = useWatch({ control, name: "password" });
