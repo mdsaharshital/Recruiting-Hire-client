@@ -5,6 +5,7 @@ import { signOutuser } from "../../features/auth/authSlice";
 import auth from "../../firebase.init";
 import { useDispatch, useSelector } from "react-redux";
 import { signOut } from "firebase/auth";
+import { FiLogOut } from "react-icons/fi";
 
 const Navbar = () => {
   const { pathname } = useLocation();
@@ -21,12 +22,12 @@ const Navbar = () => {
       }`}
     >
       <ul className="max-w-7xl mx-auto flex gap-3 h-full items-center">
-        <li className="flex-auto font-semibold text-[18px] md:text-2xl">
+        <li className="flex-auto font-semibold text-[21px] md:text-2xl">
           <Link to="/">Recruiting Hire</Link>
         </li>
         <li>
           <Link
-            className="hover:text-primary text-[14px] md:text-[16px]"
+            className="hover:text-primary text-[12px] md:text-[16px]"
             to="/jobs"
           >
             Jobs
@@ -35,8 +36,8 @@ const Navbar = () => {
         {email && role && (
           <li>
             <Link
-              className="border border-black text-[14px] md:text-[16px] px-2 py-1 rounded-full hover:border-primary hover:text-white hover:bg-primary hover:px-4 transition-all "
-              to="/dashboard"
+              className="border border-black text-[12px] md:text-[16px] px-2 py-1 rounded-full hover:border-primary hover:text-white hover:bg-primary hover:px-4 transition-all "
+              to={role === "employer" ? "/dashboard/add-job" : "applied-job"}
             >
               Dashboard
             </Link>
@@ -45,7 +46,7 @@ const Navbar = () => {
         {email && !role && (
           <li>
             <Link
-              className="border border-black text-[14px] md:text-[16px] px-2 py-1 rounded-full hover:border-primary hover:text-white hover:bg-primary hover:px-4 transition-all "
+              className="border border-black text-[12px] md:text-[16px] px-2 py-1 rounded-full hover:border-primary hover:text-white hover:bg-primary hover:px-4 transition-all "
               to="/register"
             >
               Register
@@ -60,14 +61,14 @@ const Navbar = () => {
               })
             }
           >
-            <p className="border border-black text-[14px] md:text-[16px] px-2 py-1 rounded-full hover:border-primary hover:text-white hover:bg-primary hover:px-4 transition-all cursor-pointer">
-              Sign out
+            <p className="border border-black text-[16px] md:text-[16px] px-2 py-[5px] md:px-3 md:py-2 rounded-full hover:border-primary hover:text-white hover:bg-primary hover:px-4 transition-all cursor-pointer">
+              <FiLogOut />
             </p>
           </li>
         ) : (
           <li>
             <Link
-              className="border border-black px-2 py-1 rounded-full hover:border-primary hover:text-white hover:bg-primary hover:px-4 transition-all "
+              className="border border-black text-[12px] md:text-[16px] px-2 py-1 rounded-full hover:border-primary hover:text-white hover:bg-primary hover:px-4 transition-all "
               to="/login"
             >
               Login

@@ -24,7 +24,7 @@ const Jobs = () => {
       className="bg-white rounded-full p-2 flex w-full max-w-md lg:max-w-xl overflow-hidden shadow-lg"
     >
       <input
-        className="flex-auto text-[16px] p-2 border-none outline-none focus:ring-0"
+        className="flex-auto text-sm md:text-[16px] p-2 border-none outline-none focus:ring-0"
         type="text"
         name="search"
         id="search"

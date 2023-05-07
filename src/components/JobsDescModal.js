@@ -227,7 +227,7 @@ export function JobsDescModal({ isOpen, closeModal }) {
                               <small>{email}</small>
                               <p className="text-lg font-medium">{question}</p>
                               {reply?.map((item) => (
-                                <p className="flex items-center gap-2 relative left-5">
+                                <p className="flex items-center gap-2 relative">
                                   <BsArrowReturnRight /> {item}
                                 </p>
                               ))}

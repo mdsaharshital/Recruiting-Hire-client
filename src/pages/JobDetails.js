@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import meeting from "../assets/meeting.jpg";
 import { BsArrowRightShort, BsArrowReturnRight } from "react-icons/bs";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
   useAddQueryMutation,
   useAddReplyMutation,
@@ -11,6 +11,7 @@ import {
 import { useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
 import ChitChat from "../components/ChitChat";
+import JobDescSideInfo from "../components/JobDescSideInfo";
 
 const JobDetails = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -31,13 +32,13 @@ const JobDetails = () => {
   }
 
   const {
-    companyName,
+    // companyName,
     position,
-    location,
-    experience,
-    workLevel,
-    employmentType,
-    salaryRange,
+    // location,
+    // experience,
+    // workLevel,
+    // employmentType,
+    // salaryRange,
     skills,
     requirements,
     responsibilities,
@@ -101,28 +102,31 @@ const JobDetails = () => {
           setIsVisible={setIsVisible}
         />
       )}
-      <div className="col-span-9 mb-10">
+
+      <div className="col-span-12 md:col-span-9 md:order-first mb-10">
         <div className="h-80 rounded-xl overflow-hidden">
           <img className="h-full w-full object-cover" src={meeting} alt="" />
         </div>
-        <div className="space-y-5">
-          <div className="flex justify-between items-center mt-5">
-            <h1 className="text-xl font-semibold text-primary">
-              {position}{" "}
+        <div className="space-y-5 p-2">
+          <div className="block md:flex justify-between items-center mt-5">
+            <h1 className="flex justify-between items-center text-xl font-semibold text-primary">
+              <p>{position} </p>
               {jobPostedBy === user.email && (
-                <span className="rounded-full bg-slate-200 text-black cursor-pointer text-[10px] px-2 py-1 ml-2">
+                <p className="rounded-full bg-slate-200 text-black cursor-pointer text-[10px] px-3 ml-2">
                   {applicants?.length} applicants
-                </span>
+                </p>
               )}
             </h1>
-            <div className="">
-              <button
-                className="btn mr-2"
-                disabled={!checkApply || !jobStatus}
-                onClick={() => setIsVisible(!isVisible)}
-              >
-                {checkApply ? "Message Us" : "Apply first to message"}
-              </button>
+            <div className="flex justify-center items-center mt-5 md:mt-0">
+              {checkApply && (
+                <button
+                  className="btn mr-2"
+                  disabled={!checkApply || !jobStatus}
+                  onClick={() => setIsVisible(!isVisible)}
+                >
+                  {checkApply ? "Message Us" : "Apply first to message"}
+                </button>
+              )}
               <button
                 className="btn"
                 disabled={
@@ -133,7 +137,15 @@ const JobDetails = () => {
                 }
                 onClick={handleApplyJob}
               >
-                {!jobStatus ? "Closed" : `${checkApply ? "Applied" : "Apply"}`}
+                {!jobStatus
+                  ? "Closed"
+                  : `${
+                      user.email === ""
+                        ? "Login to Apply"
+                        : user.role === "employer"
+                        ? "Recuiter can't apply"
+                        : `${checkApply ? "Applied" : "Apply"}`
+                    }   `}
               </button>
             </div>
           </div>
@@ -176,8 +188,11 @@ const JobDetails = () => {
             </ul>
           </div>
         </div>
+        <div className="block md:hidden my-5 p-2">
+          <JobDescSideInfo jobData={jobData} />
+        </div>
         <hr className="my-5" />
-        <div>
+        <div className="p-2">
           <div>
             <h1 className="text-xl font-semibold text-primary mb-5">
               General Q&A
@@ -186,27 +201,27 @@ const JobDetails = () => {
               {queries?.map(({ question, email, reply, id }) => (
                 <div>
                   <small>{email}</small>
-                  <p className="text-lg font-medium">{question}</p>
+                  <p className="text-sm md:text-lg font-medium">{question}</p>
                   {reply?.map((item) => (
-                    <p className="flex items-center gap-2 relative left-5">
+                    <p className="flex items-center gap-2 relative pl-5">
                       <BsArrowReturnRight /> {item}
                     </p>
                   ))}
 
                   {jobPostedBy === user.email && (
-                    <div className="flex gap-3 my-5">
+                    <div className="flex gap-3  my-3 md:my-5">
                       <input
                         placeholder="Reply"
                         type="text"
-                        className="w-full"
+                        className="w-full text-sm md:text-xl"
                         onBlur={(e) => setReply(e.target.value)}
                       />
                       <button
-                        className="shrink-0 h-14 w-14 bg-primary/10 border border-primary hover:bg-primary rounded-full transition-all  grid place-items-center text-primary hover:text-white"
+                        className="shrink-0 h-10 w-10 md:h-14 md:w-14 bg-primary/10 border border-primary hover:bg-primary rounded-full transition-all  grid place-items-center text-primary hover:text-white text-[22px] md:text-[30px]"
                         type="button"
                         onClick={() => handleReply(id, question)}
                       >
-                        <BsArrowRightShort size={30} />
+                        <BsArrowRightShort />
                       </button>
                     </div>
                   )}
@@ -234,56 +249,8 @@ const JobDetails = () => {
           </div>
         </div>
       </div>
-      <div className="col-span-3">
-        <div className="rounded-xl bg-primary/10 p-5 text-primary space-y-5">
-          <div>
-            <p>Experience</p>
-            <h1 className="font-semibold text-lg">{experience}</h1>
-          </div>
-          <div>
-            <p>Work Level</p>
-            <h1 className="font-semibold text-lg">{workLevel}</h1>
-          </div>
-          <div>
-            <p>Employment Type</p>
-            <h1 className="font-semibold text-lg">{employmentType}</h1>
-          </div>
-          <div>
-            <p>Salary Range</p>
-            <h1 className="font-semibold text-lg">{salaryRange}</h1>
-          </div>
-          <div>
-            <p>Location</p>
-            <h1 className="font-semibold text-lg">{location}</h1>
-          </div>
-        </div>
-        <div className="mt-5 rounded-xl bg-primary/10 p-5 text-primary space-y-5">
-          <div>
-            <h1 className="font-semibold text-lg">{companyName}</h1>
-          </div>
-          <div>
-            <p>Company Size</p>
-            <h1 className="font-semibold text-lg">Above 100</h1>
-          </div>
-          <div>
-            <p>Founded</p>
-            <h1 className="font-semibold text-lg">2001</h1>
-          </div>
-          <div>
-            <p>Email</p>
-            <h1 className="font-semibold text-lg">company.email@name.com</h1>
-          </div>
-          <div>
-            <p>Company Location</p>
-            <h1 className="font-semibold text-lg">Los Angeles</h1>
-          </div>
-          <div>
-            <p>Website</p>
-            <Link className="font-semibold text-lg" to="/">
-              https://website.com
-            </Link>
-          </div>
-        </div>
+      <div className="col-span-12 md:col-span-3 md:order-last hidden md:block">
+        <JobDescSideInfo jobData={jobData} />
       </div>
     </div>
   );

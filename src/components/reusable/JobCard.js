@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { JobsDescModal } from "../JobsDescModal";
 import { useDispatch } from "react-redux";
 import { getJobDetails } from "../../features/job/jobSlice";
+import { IoLocationSharp } from "react-icons/io5";
 
 const JobCard = ({ jobData }) => {
   const navigate = useNavigate();
@@ -33,7 +34,11 @@ const JobCard = ({ jobData }) => {
             </span>
           </small>
         </div>
-        <p>{location}</p>
+        <div className="">
+          <p className="flex items-center gap-x-1">
+            <span>{location}</span> <IoLocationSharp />
+          </p>
+        </div>
       </div>
       <div className="flex justify-between items-center mt-5">
         <p>{employmentType}</p>
