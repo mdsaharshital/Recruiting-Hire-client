@@ -17,12 +17,12 @@ const Navbar = () => {
   console.log("", user);
   return (
     <nav
-      className={`h-14 fixed w-full z-[999] ${
+      className={`h-14 px-2 fixed w-full z-[999] ${
         pathname === "/" ? null : "bg-white"
       }`}
     >
       <ul className="max-w-7xl mx-auto flex gap-3 h-full items-center">
-        <li className="flex-auto font-semibold text-[21px] md:text-2xl">
+        <li className="flex-auto font-semibold text-[22px] md:text-2xl">
           <Link to="/">Recruiting Hire</Link>
         </li>
         <li>
@@ -37,7 +37,11 @@ const Navbar = () => {
           <li>
             <Link
               className="border border-black text-[12px] md:text-[16px] px-2 py-1 rounded-full hover:border-primary hover:text-white hover:bg-primary hover:px-4 transition-all "
-              to={role === "employer" ? "/dashboard/add-job" : "applied-job"}
+              to={
+                role === "employer"
+                  ? "/dashboard/add-job"
+                  : "/dashboard/applied-job"
+              }
             >
               Dashboard
             </Link>

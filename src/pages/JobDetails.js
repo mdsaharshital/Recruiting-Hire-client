@@ -23,14 +23,15 @@ const JobDetails = () => {
   const [replyQue] = useAddReplyMutation();
   const { user } = useSelector((state) => state.auth);
   const { data } = useGetJobByIdQuery(id);
-  const { jobDetails } = useSelector((state) => state.jobs);
+  // const { jobDetails } = useSelector((state) => state.jobs);
   console.log("ee", data?.data);
 
-  let jobData = jobDetails;
-  if (Object.keys(jobDetails).length === 0) {
-    jobData = data?.data;
-  }
-
+  // let jobData = jobDetails;
+  // let jobData = [];
+  // if (Object.keys(jobDetails).length === 0) {
+  //   jobData = data?.data;
+  // }
+  const jobData = data?.data;
   const {
     // companyName,
     position,
@@ -74,22 +75,24 @@ const JobDetails = () => {
     }
     console.log(applyData);
   };
-  const handleQuery = () => {
+  const handleQuery = async () => {
     const newData = {
       userId: user._id,
       email: user.email,
       question: query,
       jobId: id,
     };
-    addQuery(newData);
+    await addQuery(newData);
+    setQuery("");
   };
-  const handleReply = (id, question) => {
+  const handleReply = async (id, question) => {
     const newData = {
       userId: id,
       reply: reply,
       question: question,
     };
-    replyQue(newData);
+    await replyQue(newData);
+    setReply("");
   };
   const checkApply =
     applicants?.filter((apps) => apps.email === user.email).length > 0;
@@ -199,9 +202,11 @@ const JobDetails = () => {
             </h1>
             <div className="text-primary my-2">
               {queries?.map(({ question, email, reply, id }) => (
-                <div>
+                <div className="my-2">
                   <small>{email}</small>
-                  <p className="text-sm md:text-lg font-medium">{question}</p>
+                  <p className="text-sm md:text-lg font-medium">
+                    Q: {question}
+                  </p>
                   {reply?.map((item) => (
                     <p className="flex items-center gap-2 relative pl-5">
                       <BsArrowReturnRight /> {item}
@@ -214,6 +219,7 @@ const JobDetails = () => {
                         placeholder="Reply"
                         type="text"
                         className="w-full text-sm md:text-xl"
+                        value={reply}
                         onBlur={(e) => setReply(e.target.value)}
                       />
                       <button
@@ -234,11 +240,12 @@ const JobDetails = () => {
                 <input
                   placeholder="Ask a question..."
                   type="text"
-                  className="w-full"
-                  onBlur={(e) => setQuery(e.target.value)}
+                  className="w-full text-sm md:text-lg"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
                 />
                 <button
-                  className="shrink-0 h-14 w-14 bg-primary/10 border border-primary hover:bg-primary rounded-full transition-all  grid place-items-center text-primary hover:text-white"
+                  className="shrink-0 h-10 w-10 md:h-14 md:w-14 bg-primary/10 border border-primary hover:bg-primary rounded-full transition-all  grid place-items-center text-primary hover:text-white"
                   type="button"
                   onClick={handleQuery}
                 >

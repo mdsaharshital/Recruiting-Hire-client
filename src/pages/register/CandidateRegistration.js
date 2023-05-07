@@ -47,9 +47,9 @@ const CandidateRegistration = () => {
         <FaChevronLeft />
         <p>back</p>
       </div>
-      <div className="flex justify-center items-center overflow-auto p-10">
+      <div className="flex justify-center items-center overflow-auto p-0 md:p-10">
         <form
-          className="bg-secondary/20 shadow-lg p-10 rounded-2xl flex flex-wrap gap-3 max-w-3xl justify-between"
+          className="bg-secondary/20 shadow-lg p-5 md:p-10 rounded-2xl flex flex-wrap gap-3 max-w-3xl justify-between"
           onSubmit={handleSubmit(onSubmit)}
         >
           <h1 className="w-full text-2xl text-primary mb-5">Candidate</h1>
@@ -57,13 +57,23 @@ const CandidateRegistration = () => {
             <label className="mb-2" htmlFor="firstName">
               First Name
             </label>
-            <input type="text" id="firstName" {...register("firstName")} />
+            <input
+              type="text"
+              id="firstName"
+              required
+              {...register("firstName")}
+            />
           </div>
           <div className="flex flex-col w-full max-w-xs">
             <label className="mb-2" htmlFor="lastName">
               Last Name
             </label>
-            <input type="text" id="lastName" {...register("lastName")} />
+            <input
+              type="text"
+              id="lastName"
+              required
+              {...register("lastName")}
+            />
           </div>
           <div className="flex flex-col w-full max-w-xs">
             <label className="mb-2" htmlFor="email">
@@ -74,6 +84,7 @@ const CandidateRegistration = () => {
               id="email"
               className="text-black bg-blue-200 cursor-not-allowed"
               disabled
+              required
               {...register("email")}
             />
           </div>
@@ -84,6 +95,7 @@ const CandidateRegistration = () => {
                 <input
                   type="radio"
                   id="male"
+                  required
                   {...register("gender")}
                   value="male"
                 />
@@ -95,6 +107,7 @@ const CandidateRegistration = () => {
                 <input
                   type="radio"
                   id="female"
+                  required
                   {...register("gender")}
                   value="female"
                 />
@@ -106,6 +119,7 @@ const CandidateRegistration = () => {
                 <input
                   type="radio"
                   id="other"
+                  required
                   {...register("gender")}
                   value="other"
                 />
@@ -120,7 +134,7 @@ const CandidateRegistration = () => {
             <label className="mb-3" for="country">
               Country
             </label>
-            <select {...register("country")} id="country">
+            <select required {...register("country")} id="country">
               {countries
                 .sort((a, b) => a?.name?.common?.localeCompare(b?.name?.common))
                 .map(({ name }) => (
@@ -132,19 +146,24 @@ const CandidateRegistration = () => {
             <label className="mb-2" htmlFor="address">
               Street Address
             </label>
-            <input type="text" {...register("address")} id="address" />
+            <input type="text" required {...register("address")} id="address" />
           </div>
           <div className="flex flex-col w-full max-w-xs">
             <label className="mb-2" htmlFor="city">
               City
             </label>
-            <input type="text" {...register("city")} id="city" />
+            <input type="text" required {...register("city")} id="city" />
           </div>
           <div className="flex flex-col w-full max-w-xs">
             <label className="mb-2" htmlFor="postcode">
               Postal Code
             </label>
-            <input type="text" {...register("postcode")} id="postcode" />
+            <input
+              type="text"
+              required
+              {...register("postcode")}
+              id="postcode"
+            />
           </div>
 
           <div className="flex justify-between items-center w-full mt-3">
@@ -152,10 +171,13 @@ const CandidateRegistration = () => {
               <input
                 className="mr-3"
                 type="checkbox"
+                required
                 {...register("term")}
                 id="terms"
               />
-              <label for="terms">I agree to terms and conditions</label>
+              <label for="terms" className="text-sm">
+                I agree to terms and conditions
+              </label>
             </div>
             <button disabled={!term} className="btn" type="submit">
               Submit

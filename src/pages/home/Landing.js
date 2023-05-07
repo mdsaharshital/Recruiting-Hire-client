@@ -2,9 +2,10 @@ import React, { useLayoutEffect, useRef } from "react";
 import hero1 from "../../assets/hero-01.jpg";
 import hero2 from "../../assets/hero-02.jpg";
 import hero3 from "../../assets/hero-03.jpg";
-import { BiSearchAlt } from "react-icons/bi";
+// import { BiSearchAlt } from "react-icons/bi";
 import Badge from "../../components/reusable/Badge";
 import { gsap } from "gsap";
+import SearchBar from "../../components/reusable/SearchBar";
 
 const Landing = () => {
   const keywords = [
@@ -96,35 +97,26 @@ const Landing = () => {
         />
       </div>
       <div className="h-full w-full flex items-center z-10 relative">
-        <div className="flex w-full">
-          <div className="w-1/2 flex flex-col items-start">
-            <h1 id="hero-title" className="heroElement font-bold text-7xl">
-              Find the perfect <br /> job for you
+        <div className="md:flex w-full">
+          <div className="md:w-1/2 flex flex-col items-center md:items-start">
+            <h1
+              id="hero-title"
+              className="heroElement font-bold text-4xl text-center md:text-start md:text-5xl lg:text-7xl"
+            >
+              Find the perfect <br />
+              job for you
             </h1>
             <p id="hero-subtitle" className="mt-5 text-lg">
               Search your career opportunity through 12,800 jobs
             </p>
-            <div
-              id="search-container"
-              className="bg-white rounded-full p-3 flex w-full max-w-xl overflow-hidden mt-5  shadow-lg"
-            >
-              <input
-                className="flex-auto text-lg p-2 border-none outline-none focus:ring-0"
-                type="text"
-                name="search"
-                id="search"
-                placeholder="Job title or Keyword"
-              />
-              <button
-                id="search-button"
-                className="p-2 rounded-full bg-primary  h-14 w-14 grid place-items-center"
-              >
-                <BiSearchAlt size="23" color="white" />
-              </button>
+            <div className="mt-5 w-full flex justify-center md:justify-start ">
+              <SearchBar />
             </div>
-            <div className="mt-16">
-              <h2 className="badge-container">Popular Search</h2>
-              <div className="mt-3 max-w-xl flex flex-wrap  gap-3">
+            <div className="mt-4 md:mt-16">
+              <h2 className="badge-container text-black md:text-black text-center md:text-start">
+                Popular Search
+              </h2>
+              <div className="mt-3 max-w-xl flex flex-wrap justify-center md:justify-start gap-3">
                 {keywords.map((item) => (
                   <Badge key={item} className="badge">
                     {item}
@@ -133,7 +125,7 @@ const Landing = () => {
               </div>
             </div>
           </div>
-          <div className="flex flex-col justify-between ">
+          <div className="hidden md:flex flex-col justify-between ">
             <div className="statCard rounded-3xl shadow-2xl p-7 bg-white relative left-[80%]">
               <div>
                 <span className="text-2xl font-bold">319 </span>

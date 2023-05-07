@@ -42,6 +42,7 @@ export const jobApi = apiSlice.injectEndpoints({
         url: "/query",
         method: "PATCH",
         body: data,
+        // invalidatesTags: ["job"],
       }),
       invalidatesTags: ["job"],
     }),

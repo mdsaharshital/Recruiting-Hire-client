@@ -64,9 +64,9 @@ const EmployerRegistration = () => {
         <FaChevronLeft />
         <p>back</p>
       </div>
-      <div className="flex justify-center items-center overflow-auto p-10">
+      <div className="flex justify-center items-center overflow-auto p-0 md:p-10">
         <form
-          className="bg-secondary/20 shadow-lg p-10 rounded-2xl flex flex-wrap gap-3 max-w-3xl justify-between"
+          className="bg-secondary/20 shadow-lg p-5 md:p-10 rounded-2xl flex flex-wrap gap-3 max-w-3xl justify-between"
           onSubmit={handleSubmit(onSubmit)}
         >
           <h1 className="w-full text-2xl text-primary mb-5">Employer </h1>
@@ -74,13 +74,23 @@ const EmployerRegistration = () => {
             <label className="mb-2" htmlFor="firstName">
               First Name
             </label>
-            <input type="text" id="firstName" {...register("firstName")} />
+            <input
+              type="text"
+              id="firstName"
+              required
+              {...register("firstName")}
+            />
           </div>
           <div className="flex flex-col w-full max-w-xs">
             <label className="mb-2" htmlFor="lastName">
               Last Name
             </label>
-            <input type="text" id="lastName" {...register("lastName")} />
+            <input
+              type="text"
+              id="lastName"
+              required
+              {...register("lastName")}
+            />
           </div>
           <div className="flex flex-col w-full max-w-xs">
             <label className="mb-2" htmlFor="email">
@@ -91,6 +101,7 @@ const EmployerRegistration = () => {
               className="text-black bg-blue-200 cursor-not-allowed"
               disabled
               id="email"
+              required
               {...register("email")}
             />
           </div>
@@ -101,6 +112,7 @@ const EmployerRegistration = () => {
                 <input
                   type="radio"
                   id="male"
+                  required
                   {...register("gender")}
                   value="male"
                 />
@@ -112,6 +124,7 @@ const EmployerRegistration = () => {
                 <input
                   type="radio"
                   id="female"
+                  required
                   {...register("gender")}
                   value="female"
                 />
@@ -123,6 +136,7 @@ const EmployerRegistration = () => {
                 <input
                   type="radio"
                   id="other"
+                  required
                   {...register("gender")}
                   value="other"
                 />
@@ -137,13 +151,18 @@ const EmployerRegistration = () => {
             <label className="mb-2" htmlFor="companyName">
               Company's name
             </label>
-            <input type="text" {...register("companyName")} id="companyName" />
+            <input
+              type="text"
+              required
+              {...register("companyName")}
+              id="companyName"
+            />
           </div>
           <div className="flex flex-col w-full max-w-xs">
             <label className="mb-3" for="employeeRange">
               Number of employee
             </label>
-            <select {...register("employeeRange")} id="employeeRange">
+            <select required {...register("employeeRange")} id="employeeRange">
               {employeeRange
                 .sort((a, b) => a.localeCompare(b))
                 .map((category) => (
@@ -156,7 +175,11 @@ const EmployerRegistration = () => {
             <label className="mb-3" for="companyCategory">
               Company's Category
             </label>
-            <select {...register("companyCategory")} id="companyCategory">
+            <select
+              required
+              {...register("companyCategory")}
+              id="companyCategory"
+            >
               {businessCategory
                 .sort((a, b) => a.localeCompare(b))
                 .map((category) => (
@@ -170,6 +193,7 @@ const EmployerRegistration = () => {
             </label>
             <input
               type="text"
+              required
               {...register("roleInCompany")}
               id="roleInCompany"
             />
@@ -180,10 +204,13 @@ const EmployerRegistration = () => {
               <input
                 className="mr-3"
                 type="checkbox"
+                required
                 {...register("term")}
                 id="terms"
               />
-              <label for="terms">I agree to terms and conditions</label>
+              <label for="terms" className="text-sm">
+                I agree to terms and conditions
+              </label>
             </div>
             <button disabled={!term} className="btn" type="submit">
               Submit

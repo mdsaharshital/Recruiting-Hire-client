@@ -94,7 +94,7 @@ function ChitChat({ data, isVisible, setIsVisible }) {
     return <p ref={chatRef}>...</p>;
   }
   return (
-    <div className="bg-gray-800 h-[440px] w-[350px] flex flex-col absolute bottom-0 md:right-[10%] right-0 border-t-[44px] border-x-[1px] border-x-slate-400 border-primary rounded-r-xl rounded-l-xl pb-3">
+    <div className="bg-gray-800 h-[440px] w-[350px] flex flex-col  fixed bottom-0 md:right-[10%] right-0 border-t-[44px] border-x-[1px] border-x-slate-400 border-primary rounded-r-xl rounded-l-xl pb-3">
       <p className="absolute top-[-33px] left-4 text-white">{firstName}</p>
       <p className="absolute top-[-33px] right-5 text-white">
         <MdClose

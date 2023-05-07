@@ -1,30 +1,51 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   useAppliedJobsQuery,
   useGetJobsQuery,
 } from "../../features/job/jobApi";
 import { BsChevronRight } from "react-icons/bs";
+import { FaChevronLeft } from "react-icons/fa";
+import Loading from "../../components/reusable/Loading";
 
 const AppliedJobs = () => {
   const navigate = useNavigate();
   const {
     user: { email },
   } = useSelector((state) => state.auth);
-  const { data, isLoading } = useAppliedJobsQuery(email);
+  const {
+    // data,
+    isLoading,
+  } = useAppliedJobsQuery(email);
   const { data: getJobsData, isLoading: getJobsLoading } = useGetJobsQuery();
   // console.log("", getJobsData);
-  if (isLoading) {
-    return <p className="text-xl py-5">Loading.....</p>;
+  if (isLoading || getJobsLoading) {
+    return <Loading />;
   }
   const filteredData = getJobsData?.data.filter((data) =>
-    data.applicants.filter((newD) => newD.email === email)
+    data.applicants.some((newD) => newD.email === email)
   );
+
+  if (filteredData?.length === 0) {
+    return (
+      <div className="h-screen w-full flex flex-col gap-5 justify-center items-center">
+        <p className="text-3xl text-red-500">No jobs found.</p>
+        <Link to="/" className="flex items-center mb-3 lg:mb-0">
+          <FaChevronLeft />
+          <h1>Back</h1>
+        </Link>
+      </div>
+    );
+  }
   console.log(filteredData);
   return (
     <div className="px-3">
       <h1 className="text-xl py-5">Applied jobs</h1>
+      <Link to="/" className="flex items-center mb-3 lg:mb-0">
+        <FaChevronLeft />
+        <h1>Back</h1>
+      </Link>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 pb-5">
         {getJobsData?.data
           ?.filter((data) =>

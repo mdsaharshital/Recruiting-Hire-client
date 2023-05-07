@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { HiLockClosed, HiLockOpen } from "react-icons/hi";
 import { toast } from "react-hot-toast";
 import Modal from "../../components/reusable/Modal";
+import Loading from "../../components/reusable/Loading";
 
 const MyPostedJobs = () => {
   const [jobData, setJobData] = useState(null);
@@ -23,7 +24,7 @@ const MyPostedJobs = () => {
     });
   };
   if (isLoading) {
-    return <p className="text-center my-5">Loading.....</p>;
+    return <Loading />;
   }
   return (
     <div className={`md:mx-8 my-8 `}>

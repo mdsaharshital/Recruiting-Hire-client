@@ -40,11 +40,8 @@ const Signup = () => {
     }
   }, [user?.email, navigate]);
   return (
-    <div className="flex h-screen items-center pt-14">
-      <div className="w-1/2">
-        <img src={loginImage} className="h-full w-full" alt="" />
-      </div>
-      <div className="w-1/2 grid place-items-center">
+    <div className="md:flex h-screen items-center pt-24">
+      <div className="md:w-1/2 grid place-items-center order-first md:order-last">
         <div className="bg-[#FFFAF4] rounded-lg grid place-items-center p-10">
           <h1 className="mb-10 font-medium text-2xl">Sign up</h1>
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -58,6 +55,7 @@ const Signup = () => {
                   name="email"
                   id="email"
                   {...register("email")}
+                  required
                 />
               </div>
 
@@ -70,6 +68,7 @@ const Signup = () => {
                   name="password"
                   id="password"
                   {...register("password")}
+                  required
                 />
               </div>
               <div className="flex flex-col items-start">
@@ -80,6 +79,7 @@ const Signup = () => {
                   type="password"
                   id="confirm-password"
                   {...register("confirmPassword")}
+                  required
                 />
               </div>
               <div className="!mt-8 ">
@@ -105,6 +105,9 @@ const Signup = () => {
             </div>
           </form>
         </div>
+      </div>
+      <div className="md:w-1/2 flex justify-center order-last md:order-first">
+        <img src={loginImage} className="h-full w-full" alt="" />
       </div>
     </div>
   );
