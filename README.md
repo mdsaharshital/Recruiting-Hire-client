@@ -10,6 +10,38 @@ The live site can be accessed at [https://recruiting-hire.netlify.app/](https://
 
 The live site can be accessed at [server](https://github.com/mdsaharshital/recruiting-hire-server)<br/>
 
+## Tech Stack
+
+- React.js
+- Redux-toolkit
+- Firebase
+- Node.js
+- Express.js
+- MongoDB
+
+## Features
+
+### User Authentication and Authorization
+
+- Users can sign up and log in to the application.
+- Employers can create job openings and view candidate information and applications.
+- Candidates can view and apply for job openings.
+
+### Real-Time Chat Functionality
+
+- Employers and candidates can communicate in real-time through a one-to-one chat feature.
+
+### Comment Section
+
+- Employers can answer queries related to job postings in the comment section.
+
+### Dashboard
+
+- Candidates have access to a dashboard where they can view and track their applied jobs.
+- Employers have access to a dashboard where they can manage job openings and communicate with candidates.
+
+<br/>
+
 ## Getting Started
 
 To get started, you can clone the client and server repositories from GitHub:
@@ -46,36 +78,6 @@ git clone https://github.com/yourusername/recruiting-hire-server.git
 3. Rename `.env.example` to `.env` and update the environment variables with your own values.
 4. Run `npm start` to start the server.
 5. The server will be running at [http://localhost:5000](http://localhost:5000).
-
-## Features
-
-### User Authentication and Authorization
-
-- Users can sign up and log in to the application.
-- Employers can create job openings and view candidate information and applications.
-- Candidates can view and apply for job openings.
-
-### Real-Time Chat Functionality
-
-- Employers and candidates can communicate in real-time through a one-to-one chat feature.
-
-### Comment Section
-
-- Employers can answer queries related to job postings in the comment section.
-
-### Dashboard
-
-- Candidates have access to a dashboard where they can view and track their applied jobs.
-- Employers have access to a dashboard where they can manage job openings and communicate with candidates.
-
-## Tech Stack
-
-- React.js
-- Redux-toolkit
-- Firebase
-- Node.js
-- Express.js
-- MongoDB
 
 ## Contributing
 
