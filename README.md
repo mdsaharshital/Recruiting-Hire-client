@@ -1,16 +1,28 @@
-# Recruiting Hire - find your dream job here
+# Recruiting Hire - Web-Based Platform for Recruiting and Job Searching
 
-Recruiting Hire is a web-based platform for recruiting and job searching. It allows users to register as employers or candidates, post and apply for jobs, and communicate in real-time. This project was developed using React.js, Redux-toolkit, Firebase, Node.js, Express.js, and MongoDB.
+## Overview
 
-## Live Site
+This is a web-based platform for recruiting and job searching that allows users to register as employers or candidates, post and apply for jobs, and communicate in real-time. The platform is built using modern web technologies such as React.js, Redux-toolkit, Firebase, Node.js, Express.js, and MongoDB.
 
-The live site can be accessed at [https://recruiting-hire.netlify.app/](https://recruiting-hire.netlify.app/)
+## Features
 
-## Server Site
+1. **User Registration**: Users can register as employers or candidates by creating an account on the platform. They can create their profile with information such as name, email, and contact information.
 
-The live site can be accessed at [server](https://github.com/mdsaharshital/recruiting-hire-server)<br/>
+2. **Job Posting**: Employers can post job openings on the platform by providing information such as job title, description, location, and required qualifications. They can also set a deadline for accepting applications.
+
+3. **Job Application**: Candidates can search and apply for jobs posted by employers. They can submit their resume and cover letter along with their application.
+
+4. **Real-Time Chat**: The platform has a real-time chat functionality that allows employers and candidates to communicate one-to-one. This helps in resolving any queries related to the job postings.
+
+5. **Comment Section**: The platform also has a comment section where employers can answer queries related to the job postings. This helps in providing more information to the candidates and resolving their queries.
+
+6. **User Authentication and Authorization**: The platform has user authentication and authorization features that enable employers to create job openings, view candidate information and applications. Only authorized users can access and manage job openings and candidate information.
+
+7. **Dashboard**: The platform has a dashboard for candidates to view and track their applied jobs, and for employers to manage job openings and communicate with candidates. The dashboard provides an overview of job postings, applications, and communication history.
 
 ## Tech Stack
+
+The platform is built using the following modern web technologies:
 
 - React.js
 - Redux-toolkit
@@ -18,27 +30,6 @@ The live site can be accessed at [server](https://github.com/mdsaharshital/recru
 - Node.js
 - Express.js
 - MongoDB
-
-## Features
-
-### User Authentication and Authorization
-
-- Users can sign up and log in to the application.
-- Employers can create job openings and view candidate information and applications.
-- Candidates can view and apply for job openings.
-
-### Real-Time Chat Functionality
-
-- Employers and candidates can communicate in real-time through a one-to-one chat feature.
-
-### Comment Section
-
-- Employers can answer queries related to job postings in the comment section.
-
-### Dashboard
-
-- Candidates have access to a dashboard where they can view and track their applied jobs.
-- Employers have access to a dashboard where they can manage job openings and communicate with candidates.
 
 <br/>
 
@@ -79,6 +70,34 @@ git clone https://github.com/yourusername/recruiting-hire-server.git
 4. Run `npm start` to start the server.
 5. The server will be running at [http://localhost:5000](http://localhost:5000).
 
+## Incoming Features
+
+1. **Profile Section for Everyone:** Add a user profile section with relevant information to help employers find suitable candidates and help candidates stand out.
+
+2. **Interactive Search Bar:** Create an autocomplete search bar to improve search functionality and make it easier for users to find relevant jobs.
+
+3. **Job Recommendations:** Create a job recommendation system based on a user's skills, experience, and search history to help them find suitable jobs.
+
+4. **Job Alerts:** Allow users to set up job alerts for specific search criteria and receive notifications when new jobs are posted.
+
+5. **Advanced Filtering:** Improve search results by adding advanced filtering options such as location, job type, salary range, and company size.
+
+6. **Resume Builder:** Create a feature that allows candidates to create and customize their resumes within the platform to make the job application process more efficient.
+
+7. **Company Reviews:** Allow users to leave reviews and ratings for companies they have worked for or interviewed with to help job seekers make informed decisions.
+
+8. **Application Tracking:** Create a feature that allows candidates to track the status of their job applications and receive updates on their progress.
+
+9. **Video Interviews:** Allow employers to conduct video interviews with candidates directly within the platform to make the interview process more efficient and convenient.
+
+10. **Skill Assessments:** Allow candidates to take skill assessments directly within the platform to showcase their abilities and qualifications to potential employers.
+
+<br/>
+
 ## Contributing
 
 Contributions are welcome! If you find any issues with the code, feel free to submit a pull request or open an issue.
+
+## Credits
+
+This project was developed by [Md Shahar Shitol](https://mdshaharshitol-88ffd.web.app/). If you have any questions or feedback, please feel free to contact me at mdsaharshitol@gmail.com
