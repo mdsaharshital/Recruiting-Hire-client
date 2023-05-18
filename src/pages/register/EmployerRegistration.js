@@ -12,7 +12,7 @@ const EmployerRegistration = () => {
     user: { email },
   } = useSelector((state) => state.auth);
 
-  console.log("reg", email);
+  //console.log("reg", email);
   const { handleSubmit, register, control, reset } = useForm({
     defaultValues: {
       email,
@@ -45,7 +45,7 @@ const EmployerRegistration = () => {
   const employeeRange = ["1 - 10", "11 - 50", "51 - 100", "Above 100"];
 
   const onSubmit = async (data) => {
-    console.log(data);
+    //console.log(data);
     const newData = { ...data, role: "employer" };
     const result = await postUser(newData);
     if (result.data.acknowledged) {

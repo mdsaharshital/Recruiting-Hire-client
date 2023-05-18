@@ -24,7 +24,7 @@ const JobDetails = () => {
   const { user } = useSelector((state) => state.auth);
   const { data } = useGetJobByIdQuery(id);
   // const { jobDetails } = useSelector((state) => state.jobs);
-  console.log("ee", data?.data);
+  //console.log("ee", data?.data);
 
   // let jobData = jobDetails;
   // let jobData = [];
@@ -55,7 +55,7 @@ const JobDetails = () => {
   //
   const newData = { email: jobPostedBy, _id: recuiterId, firstName, lastName };
   //
-  console.log("rec", recuiterId);
+  //console.log("rec", recuiterId);
   const handleApplyJob = () => {
     const currentDate = new Date();
     const isoDate = currentDate.toISOString();
@@ -73,7 +73,7 @@ const JobDetails = () => {
     } else {
       return toast.error("Sorry, You have to register first to apply");
     }
-    console.log(applyData);
+    //console.log(applyData);
   };
   const handleQuery = async () => {
     const newData = {
@@ -159,8 +159,8 @@ const JobDetails = () => {
           <div>
             <h1 className="text-primary text-lg font-medium mb-3">Skills</h1>
             <ul>
-              {skills?.map((skill) => (
-                <li className="flex items-center">
+              {skills?.map((skill, i) => (
+                <li key={i} className="flex items-center">
                   <BsArrowRightShort /> <span>{skill}</span>
                 </li>
               ))}
@@ -171,8 +171,8 @@ const JobDetails = () => {
               Requirements
             </h1>
             <ul>
-              {requirements?.map((skill) => (
-                <li className="flex items-center">
+              {requirements?.map((skill, i) => (
+                <li className="flex items-center" key={i}>
                   <BsArrowRightShort /> <span>{skill}</span>
                 </li>
               ))}
@@ -183,8 +183,8 @@ const JobDetails = () => {
               Responsibilities
             </h1>
             <ul>
-              {responsibilities?.map((skill) => (
-                <li className="flex items-center">
+              {responsibilities?.map((skill, i) => (
+                <li className="flex items-center" key={i}>
                   <BsArrowRightShort /> <span>{skill}</span>
                 </li>
               ))}
@@ -201,14 +201,17 @@ const JobDetails = () => {
               General Q&A
             </h1>
             <div className="text-primary my-2">
-              {queries?.map(({ question, email, reply, id }) => (
-                <div className="my-2">
+              {queries?.map(({ question, email, reply, id }, i) => (
+                <div className="my-2" key={i}>
                   <small>{email}</small>
                   <p className="text-sm md:text-lg font-medium">
                     Q: {question}
                   </p>
-                  {reply?.map((item) => (
-                    <p className="flex items-center gap-2 relative pl-5">
+                  {reply?.map((item, i) => (
+                    <p
+                      key={i}
+                      className="flex items-center gap-2 relative pl-5"
+                    >
                       <BsArrowReturnRight /> {item}
                     </p>
                   ))}

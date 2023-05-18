@@ -1,7 +1,15 @@
 import React from "react";
 import { BiSearchAlt } from "react-icons/bi";
 
-const SearchBar = () => {
+const SearchBar = ({ setSearchQuery, handleSearch }) => {
+  const handleInputChange = (e) => {
+    setSearchQuery(e.target.value);
+    handleSearch();
+  };
+
+  const handleSearchClick = () => {
+    handleSearch();
+  };
   return (
     <div
       id="search-container"
@@ -12,11 +20,13 @@ const SearchBar = () => {
         type="text"
         name="search"
         id="search"
-        placeholder="Job title or Keyword"
+        placeholder="Job title || Requirements || Skills"
+        onChange={handleInputChange}
       />
       <button
         id="search-button"
-        className="p-2 rounded-full bg-primary  h-10 w-10 grid place-items-center"
+        className="p-2 rounded-full bg-primary h-10 w-10 grid place-items-center"
+        onClick={handleSearchClick}
       >
         <BiSearchAlt size="21" color="white" />
       </button>

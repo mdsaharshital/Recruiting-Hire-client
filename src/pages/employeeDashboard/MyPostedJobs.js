@@ -15,10 +15,10 @@ const MyPostedJobs = () => {
   const { data, isLoading } = useGetJobsQuery();
   const [updateJob] = useUpdateJobMutation();
   const jobInfo = data?.data || [];
-  console.log(jobInfo);
+  //console.log(jobInfo);
   const handleStatus = (job) => {
     const newData = { ...job, jobStatus: !job.jobStatus };
-    console.log("", newData);
+    //console.log("", newData);
     updateJob(newData).finally(() => {
       return toast.success("Job status changed");
     });

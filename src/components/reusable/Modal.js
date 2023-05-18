@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Modal = ({ jobData, setJobData }) => {
   const applicants = jobData?.applicants;
-  console.log("modal", applicants);
+  //console.log("modal", applicants);
   return (
     <div className="shadow-lg">
       {jobData && (

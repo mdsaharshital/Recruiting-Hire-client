@@ -51,7 +51,7 @@ function ChitChat({ data, isVisible, setIsVisible }) {
   const { handleSubmit, register, reset } = useForm();
   const [addMessage] = useAddMessageMutation();
   const [messages, setMessages] = useState([]);
-  console.log("", user?.email, data?.email);
+  //console.log("", user?.email, data?.email);
   const emails = { email1: user?.email, email2: data?.email };
   const { data: getMessages, isLoading } = useGetMessagesQuery(emails, {
     pollingInterval: 1000,
@@ -63,7 +63,7 @@ function ChitChat({ data, isVisible, setIsVisible }) {
   const chatRef = useRef(null);
   const { firstName } = data;
   //
-  console.log("msg", getMessages);
+  //console.log("msg", getMessages);
   useEffect(() => {
     chatRef.current.scrollTop = chatRef.current.scrollHeight;
   }, [messages]);
@@ -86,7 +86,7 @@ function ChitChat({ data, isVisible, setIsVisible }) {
       messages: Array.isArray(messages) ? [...messages, newMG] : [newMG],
     };
     setMessages(Array.isArray(messages) ? [...messages, newMG] : [newMG]);
-    console.log("", properData);
+    //console.log("", properData);
     addMessage(properData);
     reset();
   };

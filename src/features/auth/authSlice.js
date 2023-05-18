@@ -25,7 +25,7 @@ export const createAccount = createAsyncThunk(
       .catch((err) => {
         toast.error(err.message);
       });
-    console.log("", data);
+    //console.log("", data);
     return data.user.email;
   }
 );
@@ -34,12 +34,12 @@ export const loginUser = createAsyncThunk(
   async ({ email, password }) => {
     const data = await signInWithEmailAndPassword(auth, email, password)
       .finally(() => {
-        console.log("shhs");
+        //console.log("shhs");
       })
       .catch((err) => {
         toast.error(err.message);
       });
-    console.log("", data);
+    //console.log("", data);
     return data.user.email;
   }
 );
@@ -56,7 +56,7 @@ export const getUserDB = createAsyncThunk("auth/getUser", async (email) => {
     `https://recruiting-hire-server.vercel.app/user/${email}`
   );
   const data = await res.json();
-  console.log("", data);
+  //console.log("", data);
   if (data.status) {
     return data;
   }

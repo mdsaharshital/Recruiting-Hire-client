@@ -13,7 +13,7 @@ const Login = () => {
   const { register, handleSubmit, reset } = useForm();
   const [user] = useAuthState(auth);
   const onSubmit = ({ email, password }) => {
-    console.log({ email, password });
+    //console.log({ email, password });
     dispatch(loginUser({ email, password }));
     reset();
   };

@@ -18,7 +18,7 @@ const CandidateRegistration = () => {
     },
   });
   const term = useWatch({ control, name: "term" });
-  console.log(term);
+  //console.log(term);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -28,7 +28,7 @@ const CandidateRegistration = () => {
   }, []);
 
   const onSubmit = async (data) => {
-    console.log(data);
+    //console.log(data);
     const newData = { ...data, role: "candidate" };
     const result = await postUser(newData);
     if (result.data.acknowledged) {

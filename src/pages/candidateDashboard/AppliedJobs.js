@@ -19,7 +19,7 @@ const AppliedJobs = () => {
     isLoading,
   } = useAppliedJobsQuery(email);
   const { data: getJobsData, isLoading: getJobsLoading } = useGetJobsQuery();
-  // console.log("", getJobsData);
+  // //console.log("", getJobsData);
   if (isLoading || getJobsLoading) {
     return <Loading />;
   }
@@ -38,7 +38,7 @@ const AppliedJobs = () => {
       </div>
     );
   }
-  console.log(filteredData);
+  //console.log(filteredData);
   return (
     <div className="px-3">
       <h1 className="text-xl py-5">Applied jobs</h1>

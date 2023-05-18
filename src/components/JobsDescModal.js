@@ -23,7 +23,6 @@ export function JobsDescModal({ isOpen, closeModal }) {
   const { user } = useSelector((state) => state.auth);
   const { data } = useGetJobByIdQuery(id);
   const { jobDetails } = useSelector((state) => state.jobs);
-  console.log("ee", data?.data);
 
   let jobData = jobDetails;
   if (Object.keys(jobDetails).length === 0) {
@@ -53,7 +52,6 @@ export function JobsDescModal({ isOpen, closeModal }) {
   //
   const newData = { email: jobPostedBy, _id: recuiterId, firstName, lastName };
   //
-  console.log("rec", recuiterId);
   const handleApplyJob = () => {
     const currentDate = new Date();
     const isoDate = currentDate.toISOString();
@@ -71,7 +69,6 @@ export function JobsDescModal({ isOpen, closeModal }) {
     } else {
       return toast.error("Sorry, You have to register first to apply");
     }
-    console.log(applyData);
   };
   const handleQuery = () => {
     const newData = {

@@ -28,7 +28,7 @@ const AddJob = () => {
     append: reqAppend,
     remove: reqRemove,
   } = useFieldArray({ control, name: "requirements" });
-  console.log(firstName, lastName);
+  //console.log(firstName, lastName);
   const onSubmit = (data) => {
     const newData = {
       ...data,
@@ -40,7 +40,7 @@ const AddJob = () => {
       firstName,
       lastName,
     };
-    // console.log(newData);
+    // //console.log(newData);
     postJob(newData).finally(() => {
       toast.success("Job posted");
       reset();

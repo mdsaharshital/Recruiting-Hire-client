@@ -10,7 +10,7 @@ const CandidateDetails = () => {
   const { data, isLoading } = useGetCandidateQuery(id);
   if (isLoading) return <p></p>;
   const newData = data?.data;
-  console.log(newData);
+  //console.log(newData);
 
   return (
     <div className="pt-14 px-6 ">

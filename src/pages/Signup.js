@@ -30,7 +30,7 @@ const Signup = () => {
   }, [password, confirmPassword]);
 
   const onSubmit = async ({ email, password }) => {
-    console.log(email, password);
+    //console.log(email, password);
     dispatch(createAccount({ email, password }));
     // reset();
   };

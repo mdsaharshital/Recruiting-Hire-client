@@ -6,6 +6,7 @@ import hero3 from "../../assets/hero-03.jpg";
 import Badge from "../../components/reusable/Badge";
 import { gsap } from "gsap";
 import SearchBar from "../../components/reusable/SearchBar";
+import { Link } from "react-router-dom";
 
 const Landing = () => {
   const keywords = [
@@ -110,7 +111,12 @@ const Landing = () => {
               Search your career opportunity through 12,800 jobs
             </p>
             <div className="mt-5 w-full flex justify-center md:justify-start ">
-              <SearchBar />
+              <Link
+                to={"/jobs"}
+                className="mt-5 w-full flex justify-center md:justify-start "
+              >
+                <SearchBar />
+              </Link>
             </div>
             <div className="mt-4 md:mt-16">
               <h2 className="badge-container text-black md:text-black text-center md:text-start">

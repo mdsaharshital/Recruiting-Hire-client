@@ -14,7 +14,7 @@ const Navbar = () => {
   const {
     user: { email, role },
   } = useSelector((state) => state.auth);
-  console.log("", user);
+  //console.log("", user);
   return (
     <nav
       className={`h-14 px-2 fixed w-full z-[999] ${
