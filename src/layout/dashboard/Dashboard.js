@@ -7,7 +7,7 @@ const Dashboard = () => {
     <div className="md:grid grid-cols-12">
       <Sidebar />
       <div className="col-span-9 lg:col-span-10">
-        <div className=" h-full max-w-7xl mx-auto">
+        <div className=" h-full max-w-7xl mx-auto overflow-y-auto">
           <Outlet />
         </div>
       </div>

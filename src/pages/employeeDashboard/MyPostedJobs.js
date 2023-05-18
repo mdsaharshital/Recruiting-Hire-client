@@ -15,11 +15,15 @@ const MyPostedJobs = () => {
   const { data, isLoading } = useGetJobsQuery();
   const [updateJob] = useUpdateJobMutation();
   const jobInfo = data?.data || [];
-  //console.log(jobInfo);
+  console.log(jobInfo);
+  //
   const handleStatus = (job) => {
     const newData = { ...job, jobStatus: !job.jobStatus };
     //console.log("", newData);
+    toast.dismiss();
+    toast.loading("Loading...");
     updateJob(newData).finally(() => {
+      toast.dismiss();
       return toast.success("Job status changed");
     });
   };
@@ -27,10 +31,58 @@ const MyPostedJobs = () => {
     return <Loading />;
   }
   return (
-    <div className={`md:mx-8 my-8 `}>
+    <div className={`md:mx-8 my-8 overflow-hidden `}>
       <div className={`${jobData && "blur-sm"}`}>
         <p className="my-3">My posted jobs</p>
-        <div className={`overflow-x-auto `}>
+        <div className="flex flex-col justify-center items-start gap-8 my-6">
+          {jobInfo
+            .filter((job) => job?.jobPostedBy === user?.email)
+            .map((job, i) => (
+              <div className="sm:flex justify-evenly w-full shadow-primary/10 shadow-md rounded-md px-4 py-3 sm:py-6 mx-2">
+                <div className="flex-1 mb-3 flex flex-col justify-between">
+                  <p>
+                    {i + 1}. Position: {job.position}
+                  </p>
+                  <p
+                    onClick={() => setJobData(job)}
+                    className="ml-3 underline text-primary cursor-pointer"
+                  >
+                    Applicants: {job.applicants.length}
+                  </p>
+                </div>
+                <div className=" flex-1 md:flex flex-col justify-center w-full gap-4">
+                  <p
+                    className={` ${job?.jobStatus && "text-green-500"} ${
+                      job?.jobStatus || "text-red-500"
+                    }`}
+                  >
+                    Job status: {job?.jobStatus ? "open" : "closed"}
+                  </p>
+                  <span
+                    onClick={() => handleStatus(job)}
+                    className="cursor-pointer"
+                  >
+                    {job?.jobStatus ? (
+                      <div className="flex items-center">
+                        <p className="text-sm text-slate-400 mr-2">
+                          click to close
+                        </p>
+                        <HiLockClosed fontSize={"24px"} />
+                      </div>
+                    ) : (
+                      <div className="flex items-center">
+                        <p className="text-sm text-slate-400 mr-2">
+                          click to open
+                        </p>
+                        <HiLockOpen fontSize={"24px"} />
+                      </div>
+                    )}
+                  </span>
+                </div>
+              </div>
+            ))}
+        </div>
+        {/* <div className={`overflow-x-auto `}>
           <table className="table-auto w-full text-left">
             <thead>
               <tr className="bg-gray-200 text-xs font-medium text-gray-700 uppercase tracking-wider">
@@ -41,7 +93,6 @@ const MyPostedJobs = () => {
               </tr>
             </thead>
             <tbody>
-              {/* filter only the posted persons job */}
               {jobInfo
                 .filter((job) => job?.jobPostedBy === user?.email)
                 .map((job) => (
@@ -95,7 +146,7 @@ const MyPostedJobs = () => {
                 ))}
             </tbody>
           </table>
-        </div>
+        </div> */}
       </div>
       <Modal jobData={jobData} setJobData={setJobData} />
     </div>

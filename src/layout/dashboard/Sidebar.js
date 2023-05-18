@@ -4,43 +4,34 @@ import { IoClose } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { FaChevronLeft } from "react-icons/fa";
 import { useSelector } from "react-redux";
+
 const Sidebar = () => {
   const [showMenu, setShowMenu] = useState(false);
   const {
     user: { role },
   } = useSelector((state) => state.auth);
+
   const employerMenu = [
     { name: "Add Job", path: "add-job" },
     { name: "My Jobs", path: "my-posted-jobs" },
   ];
+
   const candidateMenu = [{ name: "Applied Job", path: "applied-job" }];
 
-  const menu = (
-    <>
-      {role === "employer" &&
-        employerMenu.map(({ name, path }, index) => (
-          <li key={index}>
-            <Link
-              className="hover:bg-primary hover:text-white bg-primary/10 transition-all w-full block p-2 lg:py-2 lg:px-3 rounded-full"
-              to={path}
-            >
-              {name}
-            </Link>
-          </li>
-        ))}
-      {role === "candidate" &&
-        candidateMenu.map(({ name, path }, index) => (
-          <li key={index}>
-            <Link
-              className="hover:bg-primary hover:text-white bg-primary/10 transition-all w-full block p-2 lg:py-2 lg:px-3 rounded-full"
-              to={path}
-            >
-              {name}
-            </Link>
-          </li>
-        ))}
-    </>
-  );
+  const getMenuItems = (menuItems) => {
+    return menuItems.map(({ name, path }, index) => (
+      <li key={index}>
+        <Link
+          className="hover:bg-primary hover:text-white bg-primary/10 transition-all w-full block p-2 lg:py-2 lg:px-3 rounded-full"
+          to={path}
+          onClick={() => setShowMenu(false)}
+        >
+          {name}
+        </Link>
+      </li>
+    ));
+  };
+
   return (
     <>
       <div className="bg-primary/10 col-span-3 lg:col-span-2 h-screen sticky top-0 hidden md:block">
@@ -52,7 +43,8 @@ const Sidebar = () => {
             </Link>
             <h1 className="lg:text-[18px]">Dashboard</h1>
           </div>
-          {menu}
+          {role === "employer" && getMenuItems(employerMenu)}
+          {role === "candidate" && getMenuItems(candidateMenu)}
         </ul>
       </div>
       <div className="absolute right-2 top-5 md:hidden">
@@ -75,30 +67,8 @@ const Sidebar = () => {
               <FaChevronLeft />
               <h1>Back</h1>
             </Link>
-            {role === "employer" &&
-              employerMenu.map(({ name, path }, index) => (
-                <li key={index}>
-                  <Link
-                    className="bg-white text-black transition-all w-full block my-2 p-2 lg:py-2 lg:px-3 rounded-full"
-                    to={path}
-                    onClick={() => setShowMenu(false)}
-                  >
-                    {name}
-                  </Link>
-                </li>
-              ))}
-            {role === "candidate" &&
-              candidateMenu.map(({ name, path }, index) => (
-                <li key={index}>
-                  <Link
-                    className="bg-white text-black transition-all w-full block my-2 p-2 lg:py-2 lg:px-3 rounded-full"
-                    to={path}
-                    onClick={() => setShowMenu(false)}
-                  >
-                    {name}
-                  </Link>
-                </li>
-              ))}
+            {role === "employer" && getMenuItems(employerMenu)}
+            {role === "candidate" && getMenuItems(candidateMenu)}
           </ul>
         </div>
       )}
