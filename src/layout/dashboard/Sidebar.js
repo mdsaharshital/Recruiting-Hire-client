@@ -12,11 +12,15 @@ const Sidebar = () => {
   } = useSelector((state) => state.auth);
 
   const employerMenu = [
+    { name: "My Profile", path: "my-profile" },
     { name: "Add Job", path: "add-job" },
     { name: "My Jobs", path: "my-posted-jobs" },
   ];
 
-  const candidateMenu = [{ name: "Applied Job", path: "applied-job" }];
+  const candidateMenu = [
+    { name: "My Profile", path: "my-profile" },
+    { name: "Applied Job", path: "applied-job" },
+  ];
 
   const getMenuItems = (menuItems) => {
     return menuItems.map(({ name, path }, index) => (

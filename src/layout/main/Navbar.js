@@ -37,11 +37,7 @@ const Navbar = () => {
           <li>
             <Link
               className="border border-black text-[12px] md:text-[16px] px-2 py-1 rounded-full hover:border-primary hover:text-white hover:bg-primary hover:px-4 transition-all "
-              to={
-                role === "employer"
-                  ? "/dashboard/add-job"
-                  : "/dashboard/applied-job"
-              }
+              to={"/dashboard/my-profile"}
             >
               Dashboard
             </Link>

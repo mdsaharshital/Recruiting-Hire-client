@@ -12,7 +12,7 @@ This is a web-based platform for recruiting and job searching that allows users 
 
 3. **Job Application**: Candidates can search and apply for jobs posted by employers. They can submit their resume and cover letter along with their application.
 
-4. **Interactive Search Bar:** Create an autocomplete search bar to improve search functionality and make it easier for users to find relevant jobs.
+**Interactive Search Bar**: Enables users to search for jobs based on various criteria including position, requirements, skills, and more, providing a versatile and user-friendly search experience.
 
 5. **Real-Time Chat**: The platform has a real-time chat functionality that allows employers and candidates to communicate one-to-one. This helps in resolving any queries related to the job postings.
 

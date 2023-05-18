@@ -42,7 +42,7 @@ const AppliedJobs = () => {
   return (
     <div className="px-3">
       <h1 className="text-xl py-5">Applied jobs</h1>
-      <Link to="/" className="flex items-center mb-3 lg:mb-0">
+      <Link to="/" className="flex items-center mb-3">
         <FaChevronLeft />
         <h1>Back</h1>
       </Link>

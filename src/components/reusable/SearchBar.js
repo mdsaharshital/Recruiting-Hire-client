@@ -20,7 +20,7 @@ const SearchBar = ({ setSearchQuery, handleSearch }) => {
         type="text"
         name="search"
         id="search"
-        placeholder="Job title || Requirements || Skills"
+        placeholder="Backend || Computer science || React, Ruby"
         onChange={handleInputChange}
       />
       <button

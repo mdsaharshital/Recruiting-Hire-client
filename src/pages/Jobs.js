@@ -22,23 +22,35 @@ const Jobs = () => {
   const [searchQuery, setSearchQuery] = useState("");
 
   const handleSearch = () => {
-    // Filter jobs based on the searchQuery
-    const filteredJobs = data?.data?.filter((job) => {
-      const position = job?.position?.toLowerCase();
-      const requirements = job?.requirements || [];
-      const skills = job?.skills || [];
-      const query = searchQuery.toLowerCase();
+    const query = searchQuery.toLowerCase().replace(/[\s.,and]/g, "");
 
-      // Check if the position or any requirement matches the searchQuery
-      const isMatched =
+    const filteredJobs = data?.data?.filter((job) => {
+      const position = job?.position?.toLowerCase().replace(/[\s.,and]/g, "");
+      const requirements = job?.requirements || [];
+      const responsibilities = job?.responsibilities || [];
+      const skills = job?.skills || [];
+
+      return (
         position.includes(query) ||
-        // is requirement is macthed
         requirements.some((requirement) =>
-          requirement.toLowerCase().includes(query)
+          requirement
+            .toLowerCase()
+            .replace(/[\s.,and]/g, "")
+            .includes(query)
         ) ||
-        // is skills are macthed
-        skills.some((skill) => skill.toLowerCase().includes(query));
-      return isMatched;
+        responsibilities.some((responsibility) =>
+          responsibility
+            .toLowerCase()
+            .replace(/[\s.,and]/g, "")
+            .includes(query)
+        ) ||
+        skills.some((skill) =>
+          skill
+            .toLowerCase()
+            .replace(/[\s.,and]/g, "")
+            .includes(query)
+        )
+      );
     });
 
     return filteredJobs;

@@ -61,3 +61,16 @@
 ::-webkit-scrollbar-thumb:hover {
   background-color: rgba(255, 255, 255, 0.5);
 }
+
+/* css for profile */
+.btn-custom{
+  font-size: 14px;
+  padding: 5px 6px;
+  border: 1px solid rgb(105, 31, 116);
+  border-radius: 25px;
+  transition: 0.15s all;
+}
+.btn-custom:hover{
+  background-color: rgb(105, 31, 116);
+  color: white;
+}
