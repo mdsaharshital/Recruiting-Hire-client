@@ -123,10 +123,12 @@ const Landing = () => {
                 Popular Search
               </h2>
               <div className="mt-3 max-w-xl flex flex-wrap justify-center md:justify-start gap-3">
-                {keywords.map((item) => (
-                  <Badge key={item} className="badge">
-                    {item}
-                  </Badge>
+                {keywords.map((item, i) => (
+                  <Link to={"/jobs"} key={i}>
+                    <Badge key={item} className="badge">
+                      {item}
+                    </Badge>
+                  </Link>
                 ))}
               </div>
             </div>
