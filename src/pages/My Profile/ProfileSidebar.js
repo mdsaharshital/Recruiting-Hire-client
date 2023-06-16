@@ -20,7 +20,10 @@ const demoSkills = [
 ];
 
 const ProfileSidebar = ({ user }) => {
-  const demoAboutMe = `Full stack product designer with hands-on experience in solving problems for clients ranging from Real Estate, Hospitality, Rentals, On Demand Healthcare, IT Services & Social Network among others.`;
+  const demoAboutMe = `Full stack product designer with hands-on experience
+   in solving problems for clients ranging from Real Estate,
+   Hospitality, Rentals, On Demand Healthcare, IT Services &
+   Social Network among others.`;
 
   const [isEdit, setIsEdit] = useState(false);
   const skills = user.skills || demoSkills;
@@ -73,13 +76,13 @@ const ProfileSidebar = ({ user }) => {
           <div className="w-full flex flex-col gap-2 items-center lg:items-start justify-center mt-8">
             <h2 className="text-lg font-bold mb-2">Contact & Socials</h2>
             <ul className="flex flex-wrap items-center justify-evenly gap-4 mb-6">
-              <li className="flex items-center">
+              <li className="hover:text-primary">
                 <a href={`tel:${user.contactInformation.phoneNumber}`}>
                   <BsTelephoneFill fontSize={22} />
                 </a>
                 {/* {user.contactInformation.phoneNumber} */}
               </li>
-              <li>
+              <li className="hover:text-primary">
                 <a
                   href={user.contactInformation.linkedInProfile}
                   target="_blank"
@@ -88,7 +91,7 @@ const ProfileSidebar = ({ user }) => {
                   <BsLinkedin fontSize={22} />
                 </a>
               </li>
-              <li>
+              <li className="hover:text-primary">
                 <a
                   href={user.contactInformation.portfolioWebsite}
                   target="_blank"
@@ -97,7 +100,7 @@ const ProfileSidebar = ({ user }) => {
                   <TfiWorld fontSize={22} />
                 </a>
               </li>
-              <li>
+              <li className="hover:text-primary">
                 <a
                   href={user.socialMediaLinks.github}
                   target="_blank"
@@ -106,7 +109,7 @@ const ProfileSidebar = ({ user }) => {
                   <BsGithub fontSize={22} />
                 </a>
               </li>
-              <li>
+              <li className="hover:text-primary">
                 <a
                   href={user.socialMediaLinks.behance}
                   target="_blank"
@@ -115,7 +118,7 @@ const ProfileSidebar = ({ user }) => {
                   <BsBehance fontSize={22} />
                 </a>
               </li>
-              <li>
+              <li className="hover:text-primary">
                 <a
                   href={user.socialMediaLinks.dribbble}
                   target="_blank"

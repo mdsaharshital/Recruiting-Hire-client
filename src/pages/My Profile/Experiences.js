@@ -14,12 +14,6 @@ const demoExperiences = [
     location: "London, UK",
     position: "Senior Developer",
   },
-  {
-    companyName: "PQR Agency",
-    timeline: "Mar 2012 - Jan 2015",
-    location: "San Francisco, USA",
-    position: "Web Designer",
-  },
 ];
 
 const Experiences = () => {
