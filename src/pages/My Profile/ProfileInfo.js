@@ -13,6 +13,7 @@ const BasicInfo = ({ label, value }) => {
 const ProfileInfo = ({ user }) => {
   return (
     <div className="container mx-auto bg-primary/10 rounded-lg py-8 px-4">
+      <h1 className="text-xl text-primary font-bold ">Basic Information</h1>
       <div className="p-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
         {user.role === "candidate" && (
           <>
@@ -43,21 +44,25 @@ const ProfileInfo = ({ user }) => {
           </>
         )}
       </div>
-      <div className="flex justify-evenly mt-2">
-        <a
-          href="https://drive.google.com/file/d/1TbL088tYuIH9TNbwU68foP3Oq9VikIhO/view?usp=share_link"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center btn-custom tracking-wide space-x-2"
-        >
-          <span>See Resume</span>
-          <AiOutlineCloudDownload className="ml-1 text-xl" />
-        </a>
+      <div className="grid grid-cols-2 gap-4 justify-items-center text-sm md:text-[16px] mt-2">
+        {user.resumeLink ? (
+          <a
+            href="https://drive.google.com/file/d/1TbL088tYuIH9TNbwU68foP3Oq9VikIhO/view?usp=share_link"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center btn cursor-pointer mt-4"
+          >
+            <span>See Resume</span>
+            <AiOutlineCloudDownload className="ml-1 text-xl" />
+          </a>
+        ) : (
+          <span className="btn cursor-pointer mt-4">Upload Resume</span>
+        )}
         <a
           href={`mailto:${user.email}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center btn-custom tracking-wide space-x-2"
+          className="flex items-center btn cursor-pointer mt-4"
         >
           <span>Send Email</span>
           <AiOutlineMail className="ml-1 text-xl" />

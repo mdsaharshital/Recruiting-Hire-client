@@ -1,7 +1,15 @@
 import React, { useState } from "react";
 import ppf from "../../assets/dummyprofile.webp";
 import { FiEdit } from "react-icons/fi";
-// import { TbChecks } from "react-icons/tb";
+import {
+  BsLinkedin,
+  BsTelephoneFill,
+  BsGithub,
+  BsBehance,
+  BsDribbble,
+} from "react-icons/bs";
+import { TfiWorld } from "react-icons/tfi";
+
 const demoSkills = [
   "react.js",
   "node.js",
@@ -12,37 +20,46 @@ const demoSkills = [
 ];
 
 const ProfileSidebar = ({ user }) => {
-  const demoAboutme = `Full stack product designer with hands-on experience in solving problems for
-  clients ranging from Real Estate, Hospitality, Rentals, On Demand
-  Healthcare, IT Services & Social Network among others.`;
+  const demoAboutMe = `Full stack product designer with hands-on experience in solving problems for clients ranging from Real Estate, Hospitality, Rentals, On Demand Healthcare, IT Services & Social Network among others.`;
 
   const [isEdit, setIsEdit] = useState(false);
   const skills = user.skills || demoSkills;
-  console.log("use", user);
   return (
-    <div className="">
-      <div className="flex flex-col items-center bg-primary/10 rounded-lg py-8 px-4 relative lg:h-screen">
+    <div>
+      <div className="flex flex-col items-center bg-primary/10 rounded-lg py-8 px-4 relative lg:min-h-screen">
         <span
           onClick={() => setIsEdit(!isEdit)}
           className="absolute top-4 left-4 cursor-pointer"
         >
-          {/* <FiEdit fontSize={20} /> */}
           {!isEdit && <FiEdit fontSize={20} />}
         </span>
-        <img src={ppf} alt="Profile" className="w-32 h-32 rounded-full my-4" />
+        {user.profileImage ? (
+          <img
+            src={user?.profileImage}
+            alt="User Profile"
+            className="w-32 h-32 rounded-full my-4"
+          />
+        ) : (
+          <img
+            src={ppf}
+            alt="User Profile"
+            className="w-32 h-32 rounded-full my-4"
+          />
+        )}
         <div className="flex flex-col items-center">
           <h2 className="text-lg font-bold mb-2">
             {user?.firstName + " " + user?.lastName}
           </h2>
           {isEdit ? (
             <textarea name="about me" id="" cols="30" rows="10">
-              {demoAboutme}
+              {demoAboutMe}
             </textarea>
           ) : (
-            <p className="text-center mb-6">{demoAboutme}</p>
+            <p className="text-center mb-6">{demoAboutMe}</p>
           )}
+
           <h2 className="text-lg font-bold mb-2">Skills</h2>
-          <div className="flex flex-wrap justify-center">
+          <div className="flex flex-wrap justify-center mb-4">
             {skills.map((skill, i) => (
               <span
                 key={i}
@@ -52,12 +69,134 @@ const ProfileSidebar = ({ user }) => {
               </span>
             ))}
           </div>
+          {/*  */}
+          <div className="w-full flex flex-col gap-2 items-center lg:items-start justify-center mt-8">
+            <h2 className="text-lg font-bold mb-2">Contact & Socials</h2>
+            <ul className="flex flex-wrap items-center justify-evenly gap-4 mb-6">
+              <li className="flex items-center">
+                <a href={`tel:${user.contactInformation.phoneNumber}`}>
+                  <BsTelephoneFill fontSize={22} />
+                </a>
+                {/* {user.contactInformation.phoneNumber} */}
+              </li>
+              <li>
+                <a
+                  href={user.contactInformation.linkedInProfile}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <BsLinkedin fontSize={22} />
+                </a>
+              </li>
+              <li>
+                <a
+                  href={user.contactInformation.portfolioWebsite}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <TfiWorld fontSize={22} />
+                </a>
+              </li>
+              <li>
+                <a
+                  href={user.socialMediaLinks.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <BsGithub fontSize={22} />
+                </a>
+              </li>
+              <li>
+                <a
+                  href={user.socialMediaLinks.behance}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <BsBehance fontSize={22} />
+                </a>
+              </li>
+              <li>
+                <a
+                  href={user.socialMediaLinks.dribbble}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <BsDribbble fontSize={22} />
+                </a>
+              </li>
+            </ul>
+            {/* <h2 className="text-lg font-bold mb-2">Education</h2>
+          <ul>
+            {user.education.map((edu, i) => (
+              <li key={i}>
+                {edu.degree} - {edu.university}, {edu.year}
+              </li>
+            ))}
+          </ul> */}
+            {/* <h2 className="text-lg font-bold mb-2">Achievements</h2>
+          <ul>
+            {user.achievements.map((achievement, i) => (
+              <li key={i}>{achievement}</li>
+            ))}
+          </ul> */}
+            <h2 className="text-lg font-bold mb-2 ">Languages</h2>
+            <ul className="mb-6 flex flex-wrap gap-3">
+              {user.languages.map((language, i) => (
+                <li key={i}>{language}</li>
+              ))}
+            </ul>
+            <h2 className="text-lg font-bold mb-2 ">Interests</h2>
+            <ul className="mb-6 flex flex-wrap gap-3">
+              {user.interests.map((interest, i) => (
+                <li key={i}>{interest}</li>
+              ))}
+            </ul>
+            {/* <div className="grid grid-cols-2 w-full gap-4 my-4">
+            <div className="bg-primary/20 py-3 px-4 rounded-lg">
+              <h2 className="text-lg font-bold mb-2 ">Languages</h2>
+              <ul className="mb-6">
+                {user.languages.map((language, i) => (
+                  <li key={i}>{language}</li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="bg-primary/20 py-3 px-4 rounded-lg">
+              <h2 className="text-lg font-bold mb-2 ">Interests</h2>
+              <ul className="mb-6">
+                {user.interests.map((interest, i) => (
+                  <li key={i}>{interest}</li>
+                ))}
+              </ul>
+            </div>
+          </div> */}
+
+            <h2 className="text-lg font-bold mb-2">Availability</h2>
+            <p>{user.availability}</p>
+          </div>
           {isEdit && (
             <div>
-              <SkillsDropdown />
+              {/* SkillsDropdown component can be added here */}
+              <h2 className="text-lg font-bold mb-2">Skills</h2>
+              <div className="flex flex-wrap justify-center">
+                {skills.map((skill, i) => (
+                  <span
+                    key={i}
+                    className="bg-primary/80 text-white text-sm px-2 rounded-full mr-2 mb-2 uppercase"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+              {isEdit && (
+                <div>
+                  <SkillsDropdown />
+                </div>
+              )}
             </div>
           )}
         </div>
+
         {isEdit && (
           <div className="flex items-center">
             <span
@@ -66,13 +205,13 @@ const ProfileSidebar = ({ user }) => {
             >
               Submit
             </span>
-            {/* <TbChecks fontSize={20} /> */}
           </div>
         )}
       </div>
     </div>
   );
 };
+
 export default ProfileSidebar;
 
 const SkillsDropdown = () => {
