@@ -62,3 +62,35 @@
 ::-webkit-scrollbar-thumb:hover {
   background-color: rgba(255, 255, 255, 0.5);
 }
+/* edit profile modal */
+/* Modal Animation Styles */
+@keyframes modalFadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes modalFadeOut {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+}
+
+/* Apply Animation Styles */
+.modal-enter {
+  animation: modalFadeIn 300ms ease-out;
+}
+
+.modal-leave {
+  animation: modalFadeOut 300ms ease-in;
+}
