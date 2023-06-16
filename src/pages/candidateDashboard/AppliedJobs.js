@@ -19,10 +19,11 @@ const AppliedJobs = () => {
     isLoading,
   } = useAppliedJobsQuery(email);
   const { data: getJobsData, isLoading: getJobsLoading } = useGetJobsQuery();
-  // //console.log("", getJobsData);
+  //
   if (isLoading || getJobsLoading) {
     return <Loading />;
   }
+  // check which job candidate applied
   const filteredData = getJobsData?.data.filter((data) =>
     data.applicants.some((newD) => newD.email === email)
   );
@@ -38,7 +39,6 @@ const AppliedJobs = () => {
       </div>
     );
   }
-  //console.log(filteredData);
   return (
     <div className="px-3">
       <h1 className="text-xl py-5">Applied jobs</h1>
@@ -47,39 +47,35 @@ const AppliedJobs = () => {
         <h1>Back</h1>
       </Link>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 pb-5">
-        {getJobsData?.data
-          ?.filter((data) =>
-            data.applicants.filter((newD) => newD.email === email)
-          )
-          ?.map(({ _id, position, companyName }, index) => (
-            <div
-              key={_id}
-              className="border border-gray-300 shadow-md p-4 rounded-xl text-primary"
-            >
-              <div className="flex justify-between  text-primary ">
-                <div>
-                  <p
-                    className="text-xl cursor-pointer hover:text-blue-500"
-                    onClick={() => navigate(`/job-details/${_id}`)}
-                  >
-                    {index + 1}. {position}
-                  </p>
-                  <small className="text-primary/40 ">
-                    by{" "}
-                    <span className="font-semibold hover:text-primary cursor-pointer hover:underline transition-all">
-                      {companyName}
-                    </span>
-                  </small>
-                </div>
-                <button
-                  className=""
+        {filteredData?.map(({ _id, position, companyName }, index) => (
+          <div
+            key={_id}
+            className="border border-gray-300 shadow-md p-4 rounded-xl text-primary"
+          >
+            <div className="flex justify-between  text-primary ">
+              <div>
+                <p
+                  className="text-xl cursor-pointer hover:text-blue-500"
                   onClick={() => navigate(`/job-details/${_id}`)}
                 >
-                  <BsChevronRight />
-                </button>
+                  {index + 1}. {position}
+                </p>
+                <small className="text-primary/40 ">
+                  by{" "}
+                  <span className="font-semibold hover:text-primary cursor-pointer hover:underline transition-all">
+                    {companyName}
+                  </span>
+                </small>
               </div>
+              <button
+                className=""
+                onClick={() => navigate(`/job-details/${_id}`)}
+              >
+                <BsChevronRight />
+              </button>
             </div>
-          ))}
+          </div>
+        ))}
       </div>
     </div>
   );
